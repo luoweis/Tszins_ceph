@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Tszins</title>
+
+  <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link rel="stylesheet" href="../static/css/bootstrap.css">
+
+  <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="../static/css/style.css">
+
+  <link rel="stylesheet" href="../static/css/plugin.css">
+
+  <link rel="stylesheet" href="../static/css/landing.css">
+
+  <!--[if lt IE 9]>
+
+    <script src="../static/js/ie/respond.min.js"></script>
+
+    <script src="../static/js/ie/html5.js"></script>
+
+  <![endif]-->
+{% block head %} {% endblock %}
+</head>
+
+<body>
+
+  <!-- header -->
+
+	<header id="header" class="navbar">
+
+    <ul class="nav navbar-nav navbar-avatar pull-right">
+
+      <li class="dropdown">
+
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+          <span class="hidden-sm-only">{{ session.username }}</span>
+
+          <span class="thumb-small avatar inline"><img src="../static/images/avatar.jpg" alt="Mika Sokeil" class="img-circle"></span>
+
+          <b class="caret hidden-sm-only"></b>
+
+        </a>
+
+        <ul class="dropdown-menu">
+
+          <li><a href="/logout">Logout</a></li>
+
+        </ul>
+
+      </li>
+
+    </ul>
+
+    <a class="navbar-brand" href="#" style="color:red">Tszins</a>
+
+    <button type="button" class="btn btn-link pull-left nav-toggle hidden-lg" data-toggle="class:slide-nav slide-nav-left" data-target="body">
+
+      <i class="icon-reorder icon-xlarge text-default"></i>
+
+    </button>
+
+    <ul class="nav navbar-nav hidden-sm">
+
+      <li class="dropdown shift" data-toggle="shift:appendTo" data-target=".nav-primary .nav">
+
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cog icon-xlarge visible-sm visible-sm-inline"></i>Settings <b class="caret hidden-sm-only"></b></a>
+
+        <ul class="dropdown-menu">
+
+          <li>
+
+            <a href="#" data-toggle="class:navbar-fixed" data-target='body'>Navbar
+
+              <span class="text-active">auto</span>
+
+              <span class="text">fixed</span>
+
+            </a>
+
+          </li>
+
+          <li class="visible-lg">
+
+            <a href="#" data-toggle="class:nav-vertical" data-target="#nav">Nav
+
+              <span class="text-active">vertical</span>
+
+              <span class="text">horizontal</span>
+
+            </a>
+
+          </li>
+
+          <li class="divider hidden-sm"></li>
+
+          <li class="dropdown-header">Colors</li>
+
+          <li>
+
+            <a href="#" data-toggle="class:bg bg-black" data-target='.navbar'>Navbar
+
+              <span class="text-active">white</span>
+
+              <span class="text">inverse</span>
+
+            </a>
+
+          </li>
+
+          <li>
+
+            <a href="#" data-toggle="class:bg-light" data-target='#nav'>Nav
+
+              <span class="text-active">inverse</span>
+
+              <span class="text">light</span>
+
+            </a>
+
+          </li>
+
+        </ul>
+
+      </li>
+
+    </ul>
+
+    <form class="navbar-form pull-left shift" action="" data-toggle="shift:appendTo" data-target=".nav-primary">
+
+      <i class="icon-search text-muted"></i>
+
+      <input type="text" class="input-small form-control" placeholder="Search">
+
+    </form>
+
+	</header>
+
+  <!-- / header -->
+
+  <!-- nav -->
+
+  <nav id="nav" class="nav-primary visible-lg nav-vertical">
+
+    <ul class="nav" data-spy="affix" data-offset-top="50">
+
+      <li class="active"><a href="/"><i class="icon-dashboard icon-xlarge"></i>Dashboard</a></li>
+
+      <li class="dropdown-submenu">
+
+        <a href="#"><i class="icon-list icon-xlarge"></i>Keys</a>
+
+        <ul class="dropdown-menu">
+
+          <li><a href="table.html">显示所有</a></li>
+
+        </ul>
+
+      </li>
+
+    </ul>
+
+  </nav>
+
+  <!-- / nav -->
+{% block content %} {% endblock %}
+  <!-- footer -->
+  <footer id="footer">
+
+    <div class="text-center padder clearfix">
+
+      <p>
+
+        <small>&copy; first 2013, Mobile first web app framework base on Bootstrap</small><br><br>
+      </p>
+
+    </div>
+
+  </footer>
+
+  <a href="#" class="hide slide-nav-block" data-toggle="class:slide-nav slide-nav-left" data-target="body"></a>
+
+  <!-- / footer -->
+
+	<script src="../static/js/jquery.min.js"></script>
+
+  <!-- Bootstrap -->
+
+  <script src="../static/js/bootstrap.js"></script>
+
+  <!-- app -->
+
+  <script src="../static/js/app.js"></script>
+
+  <script src="../static/js/app.plugin.js"></script>
+
+  <script src="../static/js/app.data.js"></script>
+{% block scripts %}{% endblock %}
+
+
+  <!-- Sparkline Chart -->
+
+  <script src="../static/js/charts/sparkline/jquery.sparkline.min.js"></script>
+
+  <!-- Easy Pie Chart -->
+
+  <script src="../static/js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
+
+  <script src="../static/js/ie/excanvas.js"></script>
+
+</body>
+
+</html>

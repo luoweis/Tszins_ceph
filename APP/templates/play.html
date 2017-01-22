@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block head %}
+    <link href="../static/play/css/video-js.min.css" rel="stylesheet">
+    <script src="../static/play/js/video.min.js"></script>
+{% endblock %}
+{% block content %}
+    <section id="content">
+        <section class="main padder">
+            <div class="row">
+                <div class="col-lg-12" align="center" style="margin-top:20px;">
+            <video id="" class="video-js vjs-default-skin"  controls preload="none" width="640" height="264"
+                   poster="../static/play/Tszins.png"
+                   data-setup="{}">
+                <source src="{{ url }}" type='video/mp4' />
+                <source src="http://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
+                <source src="http://vjs.zencdn.net/v/oceans.ogv" type='video/ogg' />
+            </video>
+                </div>
+            </div>
+        </section>
+    </section>
+{% endblock %}

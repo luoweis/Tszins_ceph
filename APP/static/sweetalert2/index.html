@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>sweetalert2</title>
+
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+
+<script src="sweetalert2.js"></script>
+<link rel="stylesheet" href="sweetalert2.css">
+<link rel="stylesheet" href="buttons.css">  <!--按钮的样式,可以自定义其他的按钮样式-->
+</head>
+
+<body>
+
+<button id="success">  成功提示 </button>
+<button id="timeClose">  2秒后关闭弹框 </button>
+<button id="delect">  删除操作 </button>
+<button id="prompt">  验证提示 </button>
+<button id="checkbox">  checkbox验证 </button>
+<button id="form">  弹框内表单验证 </button>
+
+
+<script>
+$("#success").click(function(){
+	swal(
+  'Good job!',
+  '一个成功的提示!',
+  'success'
+)
+})
+$("#timeClose").click(function()
+{
+	swal({
+  title: '再给我俩秒钟',
+  text: '2秒后关闭弹框',
+  timer: 2000
+})
+	}
+)
+
+$("#delect").click(function()
+{
+swal({
+  title: '删除',
+  text: "你确定删除么?",
+  type: 'warning',   //感叹号图标
+  showCancelButton: true,   //显示取消按钮
+  confirmButtonColor: '#3085d6', //俩个按钮的颜色
+  cancelButtonColor: '#d33',
+  confirmButtonText: '删!', //俩个按钮的文本
+  cancelButtonText: '不删!',
+  confirmButtonClass: 'btn btn-success',  //俩个按钮的类样式
+  cancelButtonClass: 'btn btn-danger',
+
+}).then(function() {    //大部分，then是通用的回调函数
+  swal(
+    'Deleted!',
+    'Your file has been deleted.',
+    'success'
+  )
+}, function(dismiss) {
+  // dismiss can be 'cancel', 'overlay',
+  // 'close', and 'timer'
+  if (dismiss === 'cancel') {
+    swal(
+      'Cancelled',
+      'Your imaginary file is safe :)',
+      'error'
+    )
+  }
+})
+})
+//下面可以使用ajax进行异步操作
+$("#prompt").click(function(){
+	swal({
+  title: '输入一段不为空的值，且格式是email格式',  //标题
+  input: 'email',                             //封装的email类型  列如qq@qq.com
+  showCancelButton: true,
+  confirmButtonText: 'Submit',                //同上，重复的我就不注释了哈~
+  showLoaderOnConfirm: true,
+  preConfirm: function(email) {               //功能执行前确认操作，支持function
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {                 //添加一个时间函数，在俩秒后执行，这里可以用作异步操作数据
+        if (email === 'taken@example.com') {  //这里的意思是：如果输入的值等于'taken@example.com',数据已存在，提示信息
+          reject('用户已存在')                  //提示信息
+        } else {
+          resolve()                           //方法出口
+        }
+      }, 1000)
+    })
+  },
+  allowOutsideClick: false
+}).then(function(email) {
+  swal({
+    type: 'success',
+    title: 'Ajax request finished!',
+    html: '提交的email是 ' + email
+  })
+})
+	})
+	
+$("#checkbox").click(function()
+{
+	swal({
+  title: 'checkbox验证',
+  input: 'checkbox',
+  inputValue: 1,
+  inputPlaceholder:                    //设置复选框的值
+    '只有选中那个复选框，按钮才有效',
+  confirmButtonText:                   //支持html格式，<i class="fa fa-arrow-right></i>这一块使用了一个样式，就是那个箭头
+    'Continue <i class="fa fa-arrow-right></i>',
+  inputValidator: function(result) {
+    return new Promise(function(resolve, reject) {
+      if (result) {
+        resolve()                    //默认不选中复选框
+      } else {
+        reject('你需要选中checkbox')   //否则提示信息
+      }
+    })
+  }
+}).then(function(result) {    //回调函数
+  swal({
+    type: 'success',
+    text: 'You agreed with T&C :)'
+  })
+})
+	})
+
+$("#form").click(function()
+{
+	swal({
+  title: 'Multiple inputs',
+  html:                                                       //html标签，在弹出框中直接写相关代码，相当于可以再嵌套一个网页！ 
+                                                              
+    '<input id="swal-input1" class="swal2-input" autofocus>' + //支持css样和式其他jquery方法
+    '<input id="swal-input2" class="swal2-input">',
+  preConfirm: function() {
+    return new Promise(function(resolve) {       //默认信息不能为空
+     
+        resolve([
+          $('#swal-input1').val(),  //获取文本值
+          $('#swal-input2').val()
+        ])
+      
+    })
+  }
+}).then(function(result) {
+  swal(JSON.stringify(result))   //转换成json输出
+})
+	
+	})
+	
+</script>
+
+</body>
+</html>
