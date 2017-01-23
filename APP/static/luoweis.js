@@ -1,6 +1,7 @@
 /**
  * Created by luoweis on 2017/1/19.
  */
+//获取url地址
 function geturl(url) {
     $.ajax({
         url:url,
@@ -13,7 +14,23 @@ function geturl(url) {
         }
     })
 }
-
+//获取二维码
+function getqrcode(url){
+    $.ajax({
+        url:url,
+        type: 'GET',
+        success:function (res) {
+            swal('获取二维码','<div  style="width:200px;height: 200px;margin-left:180px;" id="showqrcode"><canvas width="200" height="200"></canvas></div>','success')
+            $("#showqrcode").erweima({
+                label: 'TszinS',
+                text: res
+            });
+        },
+        error:function () {
+            alert('error');
+        }
+    });
+}
 function doDeleteKey(deleteUrl) {
     swal({
         title: '删除',
@@ -40,7 +57,7 @@ function doDeleteKey(deleteUrl) {
                         text: res + '已经被存储集群中删除'
                     }
                 );
-                setTimeout('reload()',5000);
+                setTimeout('reload()',2000);
             },
             error:function () {
                 alert('error');
@@ -61,7 +78,7 @@ function doDeleteKey(deleteUrl) {
 function deleteKey(deleteUrl){
     swal({
         title: '输入管理员的EMAIL验证',  //标题
-        input: 'email',                             //封装的email类型  列如qq@qq.com
+        input: 'password',                             //封装的email类型  列如qq@qq.com
         showCancelButton: true,
         confirmButtonText: 'Submit',
         showLoaderOnConfirm: true,

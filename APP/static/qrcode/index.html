@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>二维码美化插件</title>
+
+    <style>
+        body {
+            background: #000;
+        }
+
+        .content {
+            width: 620px;
+            margin: auto;
+            margin-top: 100px;
+        }
+
+        #container {
+            float:left;
+            margin-right:20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <img id="imgLogo" src="img/keai.png" hidden>
+
+        <!--文字logo-->
+        <div id="container">
+            <canvas width="400" height="400"></canvas>
+        </div>
+
+        <!--图片logo-->
+        <div id="container2">
+            <canvas width="400" height="400"></canvas>
+        </div>
+    </div>
+
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/jqueryqr.js"></script>
+    <script src="js/qrcode.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            //文字logo
+            $("#container").erweima({
+                label: 'jQuery'
+            });
+
+           //图片logo
+            $('#container2').erweima({
+                mode: 4,
+                mSize:20,
+                image: $("#imgLogo")[0]
+            });
+        });
+    </script>
+</body>
+</html>
