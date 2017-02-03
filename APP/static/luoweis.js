@@ -106,3 +106,28 @@ function deleteKey(deleteUrl){
 function reload() {
     window.location.reload();
 }
+
+function playOnWeb(bucket,name,acl){
+    $.ajax({
+        url:'/play/'+bucket+'?key='+name+'&acl='+acl,
+        type:'GET',
+        success:function(url){
+            var hh='<video id=""  controls preload="none" width="640" height="264" poster="../static/plugin/play/Tszins.png" data-setup="{}"><source src="'+url +'" type="video/mp4" /></video>'
+            swal({confirmButtonText:'关闭',
+                title:'播放文件',
+                width:'800',
+                showCloseButton: true,
+                html:hh}).then(function () {
+                reload();
+            })
+        }
+    })
+}
+function playOnPhone(url){
+    var server = 'http://192.168.1.10:8080'
+    swal('获取二维码','<div  style="width:200px;height: 200px;margin-left:180px;" id="showqrcode1"><canvas width="200" height="200"></canvas></div>','success')
+            $("#showqrcode1").erweima({
+                label: 'TszinS',
+                text: server+url
+            });
+}

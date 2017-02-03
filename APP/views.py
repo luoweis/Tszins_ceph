@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from APP import app
-import os,json
+import os
 from flask import render_template
 from flask import abort, redirect, url_for,session,escape,request
 from functools import wraps
@@ -9,6 +9,27 @@ from luoweis.object_storage import object_storage
 from luoweis.confirm_email import adminsEmail
 import hashlib
 from werkzeug.utils import secure_filename
+#定义过滤器
+#过滤器 keySize
+#返回文件的大小 Kb 或 Mb
+@app.template_filter('keySize')
+def keySize(value,B):
+    res=''
+    if float(value)/(B**2) >=1:
+        res = ('%.1f%s'%((float(value)/(B**2)),'Mb'))
+    else:
+        res = ('%.1f%s'%((float(value)/(B)),'Kb'))
+    return res
+@app.template_filter('fileType')
+def fileType(file):
+    html5Video=['mp4','ogv','webm']
+    res = file.split('.')[1]#以点为分隔符
+    if res in html5Video:
+        return True
+    else:
+        return False
+
+
 
 #定义上传的路径等参数
 UPLOAD_FOLDER='/Users/luoweis/tszins'
@@ -155,6 +176,21 @@ def confirmEmail():
 @app.route('/play/<bucket>')
 @login_required
 def playVideo(bucket):
+    key = request.args['key']
+    acl = request.args['acl']
+    url=''
+    if acl=='READ':
+        url = objs.GetKeyUrl(bucket,key,private=False)
+    elif acl=='private':
+        url = objs.GetKeyUrl(bucket,key,private=True)
+    else:
+        pass
+    #return  render_template('play.html',url=url)
+    return url
+
+
+@app.route('/playOnPhone/<bucket>')
+def playVideoOnPhone(bucket):
     key = request.args['key']
     acl = request.args['acl']
     url=''
