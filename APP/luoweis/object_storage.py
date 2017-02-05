@@ -76,6 +76,7 @@ class object_storage(object):
             with FileChunkIO(source_path,'r',offset=offset,bytes=bytes) as fp:
                 mp.upload_part_from_file(fp,part_num=i + 1)
         mp.complete_upload()
+        return True
     #小文件
     def keyCreateSmall(self,bucket,filename,source_path,**kwargs):
         conn = self.connection()
@@ -83,6 +84,8 @@ class object_storage(object):
         k = Key(b)
         k.key = filename
         k.set_contents_from_filename(source_path)
+        return True
+
 
     #列出某个bucket中的所有的key的方法
     def keysList(self,bucketName):

@@ -69,7 +69,7 @@ function doDeleteKey(deleteUrl) {
         if (dismiss === 'cancel') {
             swal(
                 '取消',
-                'Your imaginary file is safe :)',
+                '文件未被删除 :)',
                 'error'
             )
         }
@@ -113,7 +113,9 @@ function playOnWeb(bucket,name,acl){
         type:'GET',
         success:function(url){
             var hh='<video id=""  controls preload="none" width="640" height="264" poster="../static/plugin/play/Tszins.png" data-setup="{}"><source src="'+url +'" type="video/mp4" /></video>'
-            swal({confirmButtonText:'关闭',
+            swal({
+                allowOutsideClick: false,
+                confirmButtonText:'关闭',
                 title:'播放文件',
                 width:'800',
                 showCloseButton: true,
@@ -130,4 +132,27 @@ function playOnPhone(url){
                 label: 'TszinS',
                 text: server+url
             });
+}
+
+//检查表单上传的文件是否有效
+function filenameCheck(obj){
+    filename = obj.value;
+    $.ajax({
+        url:'/filenameCheck?file=' + filename,
+        type:'GET',
+        success:function (res) {
+            if(res=='ok') {
+                swal({
+                    title: '文件已经存在',
+                    showCancelButton: false,
+                    confirmButtonText: '返回',
+                    showLoaderOnConfirm: true,
+                    allowOutsideClick: false
+                });
+                obj.value='';
+            }
+
+        }
+    })
+
 }
