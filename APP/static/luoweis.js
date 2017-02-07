@@ -118,7 +118,6 @@ function playOnWeb(bucket,name,acl){
                 confirmButtonText:'关闭',
                 title:'播放文件',
                 width:'800',
-                showCloseButton: true,
                 html:hh}).then(function () {
                 reload();
             })
@@ -128,17 +127,58 @@ function playOnWeb(bucket,name,acl){
 function playOnPhone(url){
     var server = 'http://192.168.1.10:8080'
     swal('获取二维码','<div  style="width:200px;height: 200px;margin-left:180px;" id="showqrcode1"><canvas width="200" height="200"></canvas></div>','success')
-            $("#showqrcode1").erweima({
-                label: 'TszinS',
-                text: server+url
-            });
+    res = $("#showqrcode1").erweima({
+        label: 'TszinS',
+        text: server+url
+    });
 }
 
+//发送邮件
+function sendEmail() {
+swal({
+        title: '输入对方邮箱',  //标题
+        input: 'email',        //封装的email类型  列如qq@qq.com
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false
+    }).then(function(email) {
+        $.ajax({
+            url:'/sendEmail',
+            type:'post',
+            data: JSON.stringify({who:email,html:'<h1>test</h1>'}),
+            contentType:'application/json',
+            beforeSend:function (XMLHttpRequest) {
+                swal({
+                    title:'正在发送邮件',
+                    imageUrl: '/static/images/loading.gif'
+                })
+            },
+            success:function (res) {
+                if (res == 'ok'){
+                    swal(
+                        '成功',
+                        '发送'+email+'邮件成功',
+                        'success'
+                    )
+                }
+            },
+            error:function () {
+                swal(
+                    '失败',
+                    '发送'+email+'邮件失败',
+                    'error'
+                    )
+            }
+        })
+    })
+}
 //检查表单上传的文件是否有效
 function filenameCheck(obj){
     filename = obj.value;
+    bucket = document.getElementById('bucket').getAttribute('mybucket');
     $.ajax({
-        url:'/filenameCheck?file=' + filename,
+        url:'/filenameCheck/'+bucket+'?file=' + filename,
         type:'GET',
         success:function (res) {
             if(res=='ok') {
@@ -154,5 +194,4 @@ function filenameCheck(obj){
 
         }
     })
-
 }

@@ -14,7 +14,6 @@ class tszins_redis():
         self.port = 9736
         self.db = 0
         self.password = 'P@ssword991120'
-        self.hsetKey = 'files'
     #创建redis链接池
     def connection(self):
         pool = redis.ConnectionPool(
@@ -25,24 +24,27 @@ class tszins_redis():
         )
         r = redis.Redis(connection_pool=pool)
         return r
-    def keyToRedisUseHset(self,key,value):
+    def keyToRedisUseHset(self,bucket,key,value):
         r = self.connection()
-        r.hset(self.hsetKey,key,value)
+        r.hset(bucket,key,value)
         return True
-    def keyExistsInHset(self,key):
+    def keyExistsInHset(self,bucket,key):
         r = self.connection()
-        res = r.hexists(self.hsetKey,key)
+        res = r.hexists(bucket,key)
         #res is bool type
         return res
-    def keyDeleteFromHset(self,key):
+    def keyDeleteFromHset(self,bucket,key):
         r = self.connection()
-        r.hdel(self.hsetKey,key)
+        r.hdel(bucket,key)
 
-    def keyFromRedisUseHset(self):
+    def keyFromRedisUseHset(self,bucket):
         r = self.connection()
-        res = r.hgetall(self.hsetKey)
+        res = r.hgetall(bucket)
         return res
-
+    def bucketSize(self,bucket,size):
+        r = self.connection()
+        res = r.incrby(bucket+'_size',size)
+        return res
     def test(self):
         r = self.connection()
         pass

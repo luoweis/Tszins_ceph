@@ -8,15 +8,19 @@ from functools import wraps
 from luoweis.object_storage import object_storage
 from luoweis.confirm_email import adminsEmail
 from luoweis.tszins_redis import tszins_redis
+from luoweis.sendEmail import sendEmail
 from werkzeug.utils import secure_filename
+
 #定义过滤器
 #过滤器 keySize
 #返回文件的大小 Kb 或 Mb
 @app.template_filter('keySize')
 def keySize(value,B):
-    res=''
-    if float(value)/(B**2) >=1:
-        res = ('%.1f%s'%((float(value)/(B**2)),'Mb'))
+
+    if float(value)/(B**3) >=1:
+        res = ('%.1f%s'%((float(value)/(B**3)),'Gb'))
+    elif float(value)/(B**2) >=1:
+        res = ('%.1f%s' % ((float(value) / (B ** 2)), 'Mb'))
     else:
         res = ('%.1f%s'%((float(value)/(B)),'Kb'))
     return res
@@ -28,8 +32,7 @@ def fileType(file):
         return True
     else:
         return False
-
-
+''' --以上是定义的过滤器-- '''
 
 #定义上传的路径等参数
 UPLOAD_FOLDER='/Users/luoweis/tszins'
@@ -107,32 +110,47 @@ def keyUpload(bucket):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             #首先判断redis数据库中是否有该filename
-            if tszins_redis.keyExistsInHset(filename):
+            if tszins_redis.keyExistsInHset(bucket,filename):
                 return redirect(url_for('index'))
             else:
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))#保存到本地路径中
                 file_size = os.stat(os.path.join(app.config['UPLOAD_FOLDER'], filename)).st_size#统计文件的大小
                 source_path = os.path.join(app.config['UPLOAD_FOLDER'],filename)
+                redis_value ={"size": file_size, "tag": tag}
                 if file_size >= 52428800:
                     res = objs.keyCreate(bucket,source_path,file_size)
                     if res:
                         # 上传完之后赋予上传的key指定的权限
                         objs.acl_create(bucket, filename,acl=acl)
                         #将文件名字写入redis数据库中
-                        tszins_redis.keyToRedisUseHset(filename,tag)
+                        tszins_redis.keyToRedisUseHset(bucket,filename,redis_value)
+                        #统计bucket的key的大小
+                        tszins_redis.bucketSize(bucket,file_size)
                         #上传完成后清空上传的文件
                         os.remove(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-                        return redirect(url_for('index'))
+                        return redirect(url_for('listKeys',bucket=bucket))
                 else:
                     res = objs.keyCreateSmall(bucket,filename,source_path)
                     if res:
                         # 上传完之后赋予上传的key指定的权限
                         objs.acl_create(bucket, filename,acl=acl)
                         # 将文件名字写入redis数据库中
-                        tszins_redis.keyToRedisUseHset(filename, tag)
+                        tszins_redis.keyToRedisUseHset(bucket,filename, redis_value)
+                        # 统计bucket的key的大小
+                        tszins_redis.bucketSize(bucket, file_size)
                         # 上传完成后清空上传的文件
                         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                        return redirect(url_for('index'))
+                        return redirect(url_for('listKeys',bucket=bucket))
+
+##定义一个用来检查上传的文件是否已经存在的路由
+@app.route('/filenameCheck/<bucket>')
+def filenameCheck(bucket):
+    filename = request.args['file']
+    res = tszins_redis.keyExistsInHset(bucket, filename)
+    if res:
+        return 'ok'
+    else:
+        return 'no'
 
 #创建一个bucket
 @app.route('/bucket/create')
@@ -143,10 +161,9 @@ def creat_bucket():
 #列出指定的bucket下所有的key
 @app.route('/list/<bucket>')
 @login_required
-def list_keys(bucket):
+def listKeys(bucket):
     keys = objs.keysList(bucket)
-    red = tszins_redis.keyFromRedisUseHset()
-    return render_template('keys.html',bucket = bucket,keys = keys,redis=red)
+    return render_template('keys.html',bucket = bucket,keys = keys)
 #
 @app.route('/geturl/<bucket>')
 def geturl(bucket):
@@ -160,21 +177,18 @@ def geturl(bucket):
         return url
     else:
         pass
-#将key从存储集群下载到服务器指定的目录上
-@app.route('/key/download')
-def download_key():
-    bucketName = 'tszins-for-luoweis1'
-    keyName = 'testluoweis1.jpg'
-    objs.keyDownload(bucketName,keyName)
-    return redirect(url_for('list_keys'))
 #删除指定bucket中的key
 @app.route('/key/delete/<bucket>')
 def deleteKey(bucket):
     key = request.args['key']
+    size = request.args['size']
     #从ceph中删除
     objs.deleteKey(bucket,key)
     #从redis数据库中删除
-    tszins_redis.keyDeleteFromHset(key)
+    tszins_redis.keyDeleteFromHset(bucket,key)
+    #redis中记录的存储占用量删除
+    r = tszins_redis.connection()
+    r.decr(bucket+'_size',size)
     return key
 #邮箱验证的本地方法，邮箱是写死在程序中的
 @app.route('/confirmEmail')
@@ -217,21 +231,13 @@ def playVideoOnPhone(bucket):
     return  render_template('play.html',url=url)
 
 ######--------------Redis for  test-----------###
-@app.route('/test')
+@app.route('/redistest')
 def testSingle():
-    res = json.dumps(tszins_redis.keyFromRedisUseHset())
+    res = json.dumps(tszins_redis.keyFromRedisUseHset('tszins-for-luoweis'))
     # res = tszins_redis.keyExistsInHset('606007.gif')
     # if res:
     #     return "yes"
     # else:
     #     return 'no'
     return res
-##定义一个用来检查上传的文件是否已经存在的路由
-@app.route('/filenameCheck')
-def filenameCheck():
-    filename = request.args['file']
-    res = tszins_redis.keyExistsInHset(filename)
-    if res:
-        return 'ok'
-    else:
-        return 'no'
+

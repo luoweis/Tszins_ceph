@@ -14,8 +14,11 @@
 import boto
 import boto.s3.connection
 from boto.s3.key import  Key
-import os,math
+import os,math,json,sys
 from filechunkio import FileChunkIO
+import tszins_redis
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 class object_storage(object):
     def __init__(self):
@@ -44,6 +47,9 @@ class object_storage(object):
         bucketlist=[]
         bucketsInfo['count'] = len(buckets)
         cc = 0
+        totalSize = 0
+        red = tszins_redis.tszins_redis()
+        r = red.connection()
         for bucket in buckets:
             bucketInfo={}
             c=0
@@ -53,9 +59,14 @@ class object_storage(object):
             bucketInfo['name'] = bucket.name
             bucketInfo['create'] = bucket.creation_date
             bucketInfo['count'] = c
+            size = r.get(bucket.name+'_size') or 0#size type is str
+            bucketInfo['size'] = size
+            size = int(size)#chang str to int
+            totalSize+=size
             bucketlist.append(bucketInfo)
         bucketsInfo['buckets'] = bucketlist
         bucketsInfo['keys'] = cc
+        bucketsInfo['totalSize'] = totalSize#所有key的size总量
         return bucketsInfo
 
     #创建一个bucket的函数
@@ -94,12 +105,17 @@ class object_storage(object):
         keys = bucket.list()
         d = {}
         L = []
+        red = tszins_redis.tszins_redis()
+        r = red.connection()
         for key in keys:
             acls = self.getKeyAcl(bucketName,key)#获得key的权限
+            value = r.hget(bucketName,key.name)#从redis中取得的结果是 str类型，value 的类型是str 需要json转换
+            value = eval(value)#通过eval方法将str 转换成字典
+            tag = value['tag']
             if acls.has_key('others'):
-                d[key.name] = {'size':key.size,'date':key.last_modified,'acl':acls['others']}
+                d[key.name] = {'size':key.size,'date':key.last_modified,'acl':acls['others'],'tag':tag}
             else:
-                d[key.name] = {'size': key.size, 'date': key.last_modified, 'acl': 'private'}
+                d[key.name] = {'size': key.size, 'date': key.last_modified, 'acl': 'private','tag':tag}
             L.append(d)
             d={}
         return L

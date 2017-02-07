@@ -2,3 +2,4 @@ Flask
 boto
 redis
 hiredis
+flask-mail
