@@ -125,7 +125,7 @@ function playOnWeb(bucket,name,acl){
     })
 }
 function playOnPhone(url){
-    var server = 'http://192.168.1.10:8080'
+    var server = 'http://192.168.1.10:8080';
     swal('获取二维码','<div  style="width:200px;height: 200px;margin-left:180px;" id="showqrcode1"><canvas width="200" height="200"></canvas></div>','success')
     res = $("#showqrcode1").erweima({
         label: 'TszinS',
@@ -134,8 +134,13 @@ function playOnPhone(url){
 }
 
 //发送邮件
-function sendEmail() {
-swal({
+function sendEmail(url) {
+    var server = 'http://192.168.1.10:8080';
+    $("#getcanvastomail").erweima({
+        label: 'TszinS',
+        text: server+url
+    });
+    swal({
         title: '输入对方邮箱',  //标题
         input: 'email',        //封装的email类型  列如qq@qq.com
         showCancelButton: true,
