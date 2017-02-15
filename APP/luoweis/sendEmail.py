@@ -21,7 +21,7 @@ mail = Mail(app)
 def sendEmail():
     who = request.json.get('who')#前端通过POST传递过来的json数据，通过这种方法提取数据
     html = request.json.get('html')
-    msg = Message('你好，测试邮件',
+    msg = Message('来自青岛三藏信息技术有限公司_From TszinS',
                   sender='luoweis@126.com',
                   recipients=[who]
                   )

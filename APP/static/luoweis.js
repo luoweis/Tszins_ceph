@@ -31,6 +31,7 @@ function getqrcode(url){
         }
     });
 }
+
 function doDeleteKey(deleteUrl) {
     swal({
         title: '删除',
@@ -77,7 +78,7 @@ function doDeleteKey(deleteUrl) {
 }
 function deleteKey(deleteUrl){
     swal({
-        title: '输入管理员的EMAIL验证',  //标题
+        title: '输入口令进行验证',  //标题
         input: 'password',                             //封装的email类型  列如qq@qq.com
         showCancelButton: true,
         confirmButtonText: 'Submit',
@@ -93,7 +94,7 @@ function deleteKey(deleteUrl){
                 }else{
                     swal(
                         'Cancelled',
-                        '邮箱验证失败',
+                        '口令验证失败',
                         'error'
                     )
                 }
@@ -140,6 +141,10 @@ function sendEmail(url) {
         label: 'TszinS',
         text: server+url
     });
+    var mycanvas = document.getElementById('canvascontent');
+    //将canvas转化成图片
+    var image = mycanvas.toDataURL("image/png");
+    var html = "<html><head><style type='text/css'>body{text-align:center}</style><body><div id='tszins'><img src='"+image+"' alt='from tszins' /></div></head></body></html>";
     swal({
         title: '输入对方邮箱',  //标题
         input: 'email',        //封装的email类型  列如qq@qq.com
@@ -151,7 +156,7 @@ function sendEmail(url) {
         $.ajax({
             url:'/sendEmail',
             type:'post',
-            data: JSON.stringify({who:email,html:'<h1>test</h1>'}),
+            data: JSON.stringify({who:email,html:html}),
             contentType:'application/json',
             beforeSend:function (XMLHttpRequest) {
                 swal({
@@ -198,5 +203,91 @@ function filenameCheck(obj){
             }
 
         }
+    })
+}
+
+//增加bucket
+function addBucket(){
+    swal({
+        title: '输入口令进行验证',  //标题
+        input: 'password',                             //封装的email类型  列如qq@qq.com
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false
+    }).then(function(email) {
+        $.ajax({
+            url:'/confirmEmail?email=' + email,
+            type:'GET',
+            success:function (res) {
+                if (res == 'ok'){
+                    swal({
+                        title: '输入Bucket名字',  //标题
+                        input: 'text',
+                        showCancelButton: true,
+                        confirmButtonText: 'Submit',
+                        showLoaderOnConfirm: true,
+                        allowOutsideClick: false
+                    }).then(function (bucket) {
+                        $.ajax({
+                            url:'/addBucket?bucket=' + bucket,
+                            type:'GET',
+                            success:function(){
+                                swal(
+                                    '成功',
+                                    '创建Bucket'+bucket+'成功',
+                                    'success'
+                                );
+                                reload();
+                            }
+                        })
+                    })
+                }else{
+                    swal(
+                        'Cancelled',
+                        '口令验证失败',
+                        'error'
+                    )
+                }
+            }
+        })
+    })
+}
+//删除bucket
+function delBucket(Bucket){
+    swal({
+        title: '输入口令进行验证',  //标题
+        input: 'password',                             //封装的email类型  列如qq@qq.com
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false
+    }).then(function(email) {
+        $.ajax({
+            url:'/confirmEmail?email=' + email,
+            type:'GET',
+            success:function (res) {
+                if (res == 'ok'){
+                    $.ajax({
+                        url:'/delBucket?bucket=' + Bucket,
+                        type:'GET',
+                        success:function () {
+                            swal(
+                                '成功',
+                                '删除Bucket'+Bucket+'成功',
+                                'success'
+                            );
+                            reload();
+                        }
+                    })
+                }else{
+                    swal(
+                        'Cancelled',
+                        '口令验证失败',
+                        'error'
+                    )
+                }
+            }
+        })
     })
 }

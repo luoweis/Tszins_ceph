@@ -10,7 +10,7 @@ import redis
 
 class tszins_redis():
     def __init__(self):
-        self.host = '192.168.1.80'
+        self.host = '192.168.1.21'
         self.port = 9736
         self.db = 0
         self.password = 'P@ssword991120'

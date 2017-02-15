@@ -22,11 +22,12 @@ sys.setdefaultencoding('utf-8')
 
 class object_storage(object):
     def __init__(self):
-        self.access_key = 'A4C11AG3OXAAA13ACB7Z'
-        self.secret_key = 'n51WBWfEB6R0JAUtfsDWC3uP6WHSvzwCq5BKbFOU'
-        self.host = '192.168.1.70'
+        self.access_key = 'SWBZYBGGJOMLWPXR4O15'
+        self.secret_key = 'XONMdWpLvAw2OpDHIjT0kqc0i1xj1KOqDKYuJExX'
+        self.host = '192.168.1.40'
         self.port = 80
         self.is_secure = False
+        self.grantID = 'tszins'
     #创建链接
     def connection(self):
         conn = boto.connect_s3(
@@ -69,10 +70,15 @@ class object_storage(object):
         bucketsInfo['totalSize'] = totalSize#所有key的size总量
         return bucketsInfo
 
-    #创建一个bucket的函数
-    def bucketCreate(self,CreateBucketName):
+    #创建一个bucket
+    def bucketCreate(self,bucket):
         conn = self.connection()
-        conn.create_bucket(CreateBucketName)
+        conn.create_bucket(bucket)
+    #删除一个为空的bucket
+    def bucketDel(self,bucket):
+        conn = self.connection()
+        conn.delete_bucket(bucket)
+
     #创建bucket中的对象的方法
     #大于50M的文件
     def keyCreate(self,bucket,source_path,source_size,**kwargs):
@@ -140,7 +146,8 @@ class object_storage(object):
     def acl_create(self,bucketName,keyName,**kwargs):
         conn = self.connection()
         bucket = conn.get_bucket(bucketName)
-        bucket.set_acl('public-read')
+        #bucket.set_acl('public-read')
+        bucket.set_acl('private')
         # 判断是否有指定的key存在
         k = bucket.get_key(keyName)
         if k:
@@ -157,6 +164,8 @@ class object_storage(object):
         if k:
             if kwargs['private'] == True:
                 KeyUrl = k.generate_url(3600, query_auth=True, force_http=True)
+            elif kwargs['FULL_CONTROL']:
+                KeyUrl = k.generate_url(3600, query_auth=True, force_http=True)
             else:
                 KeyUrl=k.generate_url(0, query_auth=False, force_http=True)
         return KeyUrl
@@ -171,7 +180,7 @@ class object_storage(object):
         acls = {}
         for grant in acl:
             #print grant.permission,grant.display_name, grant.email_address, grant.id
-            if grant.id == 'luoweis':
+            if grant.id == self.grantID:
                 acls['owner'] = grant.permission
             else:
                 if not grant.permission:
@@ -179,8 +188,16 @@ class object_storage(object):
                 else:
                     acls['others'] = grant.permission
         return acls
+    #获取bucket的权限
+    def getBucketAcl(self,bucket):
+        conn=self.connection()
+        b = conn.get_bucket(bucket)
+        acl = b.get_acl().acl.grants
+        return acl
+
     #删除指定bucket中的指定的key
     def deleteKey(self,bucket,key):
         conn=self.connection()
         b=conn.get_bucket(bucket)
         b.delete_key(key)
+

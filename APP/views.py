@@ -153,11 +153,18 @@ def filenameCheck(bucket):
         return 'no'
 
 #创建一个bucket
-@app.route('/bucket/create')
-def creat_bucket():
-    bucket = 'tszins-for-luoweis2'
+@app.route('/addBucket')
+def addBucket():
+    bucket = request.args['bucket']
     objs.bucketCreate(bucket)
-    return redirect(url_for('list_buckets'))
+    return 'ok'
+#删除一个bucket
+@app.route('/delBucket')
+def delBucket():
+    bucket = request.args['bucket']
+    objs.bucketDel(bucket)
+    return 'ok'
+
 #列出指定的bucket下所有的key
 @app.route('/list/<bucket>')
 @login_required
@@ -230,7 +237,7 @@ def playVideoOnPhone(bucket):
         pass
     return  render_template('play.html',url=url)
 
-######--------------Redis for  test-----------###
+######-------------- single  test-----------###
 @app.route('/redistest')
 def testSingle():
     res = json.dumps(tszins_redis.keyFromRedisUseHset('tszins-for-luoweis'))
@@ -241,3 +248,8 @@ def testSingle():
     #     return 'no'
     return res
 
+@app.route('/single1')
+def single1():
+    bucket = 'tszins-for-test'
+    acl = objs.getBucketAcl(bucket)
+    return acl

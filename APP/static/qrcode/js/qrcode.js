@@ -23,6 +23,7 @@
 			background: "#fff",
 			//text: "http://www.jq22.com",
 			size: 200,
+			id: "canvascontent",
 			radius: .5,
 			quiet: 4,
 			mode: 2,
