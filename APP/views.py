@@ -43,7 +43,8 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args,**kwargs):
         if 'username' not in session:
-            return redirect(url_for('login',next=request.url))
+            #return redirect(url_for('login',next=request.url))
+            return redirect(url_for('login'))
         return f(*args,**kwargs)
     return decorated_function
 #验证上传的文件类型
@@ -67,7 +68,7 @@ def login():
         if username =='':
             return redirect(url_for('login'))
         if username =='luoweis' and  m1.hexdigest() == password_md5:
-            session['username'] = request.form['username']
+            session['username']  = request.form['username']
             return redirect(url_for('index'))
         else:
             return redirect(url_for('login'))
@@ -100,7 +101,7 @@ def upload():
 #上传到bucket中
 #上传方式区分文件的大小
 #以50MiB为基准
-@app.route('/keyUpload/<bucket>',methods=['GET','POST'])
+@app.route('/keyUpload/<bucket>',methods=['POST'])
 @login_required
 def keyUpload(bucket):
     if request.method=='POST':
@@ -128,7 +129,8 @@ def keyUpload(bucket):
                         tszins_redis.bucketSize(bucket,file_size)
                         #上传完成后清空上传的文件
                         os.remove(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-                        return redirect(url_for('listKeys',bucket=bucket))
+                        #return redirect(url_for('listKeys',bucket=bucket))
+                        return 'ok'
                 else:
                     res = objs.keyCreateSmall(bucket,filename,source_path)
                     if res:
@@ -140,7 +142,8 @@ def keyUpload(bucket):
                         tszins_redis.bucketSize(bucket, file_size)
                         # 上传完成后清空上传的文件
                         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                        return redirect(url_for('listKeys',bucket=bucket))
+                        #return redirect(url_for('listKeys',bucket=bucket))
+                        return 'ok'
 
 ##定义一个用来检查上传的文件是否已经存在的路由
 @app.route('/filenameCheck/<bucket>')

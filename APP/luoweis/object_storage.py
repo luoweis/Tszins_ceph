@@ -163,9 +163,9 @@ class object_storage(object):
         k = bucket.get_key(keyName)
         if k:
             if kwargs['private'] == True:
-                KeyUrl = k.generate_url(3600, query_auth=True, force_http=True)
+                KeyUrl = k.generate_url(86400, query_auth=True, force_http=True)
             elif kwargs['FULL_CONTROL']:
-                KeyUrl = k.generate_url(3600, query_auth=True, force_http=True)
+                KeyUrl = k.generate_url(86400, query_auth=True, force_http=True)
             else:
                 KeyUrl=k.generate_url(0, query_auth=False, force_http=True)
         return KeyUrl

@@ -186,7 +186,7 @@ function sendEmail(url) {
 //检查表单上传的文件是否有效
 function filenameCheck(obj){
     filename = obj.value;
-    bucket = document.getElementById('bucket').getAttribute('mybucket');
+    bucket = document.getElementById('keyName').getAttribute('mybucket');
     $.ajax({
         url:'/filenameCheck/'+bucket+'?file=' + filename,
         type:'GET',
@@ -289,5 +289,61 @@ function delBucket(Bucket){
                 }
             }
         })
+    })
+}
+//upload submit
+//异步提交方法
+function uploadSubmit(bucket){
+    var form = new FormData(document.getElementById("uploadForm"));//type object
+    //var tag = form.get('tag');//获取表达中的name值
+    //alert(tag);
+    //for(x in form){
+    //    alert(x);
+    //}
+    var fileName = form.get('file').name;//获取到form表单中file的文件名称
+    var file = document.getElementById("keyName").files[0];
+    if (file) {
+          var fileSize = 0;
+          if (file.size > 1024 * 1024)
+            fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+          else
+            fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+        }
+    $.ajax({
+        url:'/keyUpload/' + bucket,
+        type: 'POST',
+        data: form,
+        processData:false,
+        contentType:false,
+        beforeSend:function () {
+            swal({
+                title: "开始上传",
+                html: "<p>文件:"+fileName+"</p>"+"<p>大小:"+fileSize+"</p>",
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                showCancelButton: true,
+                cancelButtonText: '取消',
+                imageUrl: '/static/images/loading.gif'
+            })
+        },
+        success:function (res) {
+            if (res == 'ok'){
+                swal({
+                        title: '成功',
+                        text: "上传"+fileName+"成功！",
+                        type: 'success',
+                        timer:2000
+                    }
+                );
+                reload();
+            }
+        },
+        error:function () {
+            swal(
+                '失败',
+                '上传'+fileName+'失败',
+                'error'
+            )
+        }
     })
 }
