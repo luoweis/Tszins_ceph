@@ -17,17 +17,18 @@ from boto.s3.key import  Key
 import os,math,json,sys
 from filechunkio import FileChunkIO
 import tszins_redis
+import config
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 class object_storage(object):
     def __init__(self):
-        self.access_key = 'SWBZYBGGJOMLWPXR4O15'
-        self.secret_key = 'XONMdWpLvAw2OpDHIjT0kqc0i1xj1KOqDKYuJExX'
-        self.host = '192.168.1.40'
-        self.port = 80
+        self.access_key = config.ceph_access_key
+        self.secret_key = config.ceph_secret_key
+        self.host = config.ceph_radosgw_host
+        self.port = config.ceph_radosgw_port
         self.is_secure = False
-        self.grantID = 'tszins'
+        self.grantID = config.ceph_access_grantID
     #创建链接
     def connection(self):
         conn = boto.connect_s3(

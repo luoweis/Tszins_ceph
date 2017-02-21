@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import redis
+import config
 #redis 创建一个示例
 #r = redis.StrictRedis(host='192.168.1.80',port=9736,db=0,password='P@ssword991120')
 #创建redis链接池
@@ -10,10 +11,10 @@ import redis
 
 class tszins_redis():
     def __init__(self):
-        self.host = '192.168.1.21'
-        self.port = 9736
-        self.db = 0
-        self.password = 'P@ssword991120'
+        self.host = config.redis_server
+        self.port = config.redis_port
+        self.db = config.redis_db
+        self.password = config.redis_password
     #创建redis链接池
     def connection(self):
         pool = redis.ConnectionPool(

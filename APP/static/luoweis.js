@@ -2,6 +2,7 @@
  * Created by luoweis on 2017/1/19.
  */
 //获取url地址
+var web_server = 'http://192.168.1.10:8080';
 function geturl(url) {
     $.ajax({
         url:url,
@@ -126,20 +127,19 @@ function playOnWeb(bucket,name,acl){
     })
 }
 function playOnPhone(url){
-    var server = 'http://192.168.1.10:8080';
+
     swal('获取二维码','<div  style="width:200px;height: 200px;margin-left:180px;" id="showqrcode1"><canvas width="200" height="200"></canvas></div>','success')
     res = $("#showqrcode1").erweima({
         label: 'TszinS',
-        text: server+url
+        text: web_server+url
     });
 }
 
 //发送邮件
 function sendEmail(url) {
-    var server = 'http://192.168.1.10:8080';
     $("#getcanvastomail").erweima({
         label: 'TszinS',
-        text: server+url
+        text: web_server+url
     });
     var mycanvas = document.getElementById('canvascontent');
     //将canvas转化成图片

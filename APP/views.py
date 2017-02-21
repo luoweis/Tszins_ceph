@@ -6,9 +6,10 @@ from flask import render_template
 from flask import abort, redirect, url_for,session,escape,request
 from functools import wraps
 from luoweis.object_storage import object_storage
-from luoweis.confirm_email import adminsEmail
 from luoweis.tszins_redis import tszins_redis
 from luoweis.sendEmail import sendEmail
+#引入全局配置文件
+import luoweis.config
 from werkzeug.utils import secure_filename
 
 #定义过滤器
@@ -34,10 +35,9 @@ def fileType(file):
         return False
 ''' --以上是定义的过滤器-- '''
 
-#定义上传的路径等参数
-UPLOAD_FOLDER='/Users/luoweis/tszins'
+
 ALLOWED_EXTENSIONS = set(['txt','pdf','png','jpg','jpeg','gif','mp4','ogv','webm'])
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER'] = luoweis.config.UPLOAD_FOLDER
 #验证登录的装饰器
 def login_required(f):
     @wraps(f)
@@ -59,7 +59,6 @@ tszins_redis = tszins_redis()
 #登录login
 @app.route('/login',methods=['GET','POST'])
 def login():
-    password_md5 = 'a44df41524d1b7198e6e2c3cda445caf'
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -67,8 +66,8 @@ def login():
         m1.update(password)
         if username =='':
             return redirect(url_for('login'))
-        if username =='luoweis' and  m1.hexdigest() == password_md5:
-            session['username']  = request.form['username']
+        if luoweis.config.admins.has_key(username) and  m1.hexdigest() == luoweis.config.admins[username]:
+            session['username']  = username
             return redirect(url_for('index'))
         else:
             return redirect(url_for('login'))
@@ -205,7 +204,7 @@ def deleteKey(bucket):
 @login_required
 def confirmEmail():
     askEmail = request.args['email']
-    if adminsEmail.has_key(askEmail) and adminsEmail[askEmail] == session['username']:
+    if luoweis.config.adminsEmail.has_key(askEmail) and luoweis.config.adminsEmail[askEmail] == session['username']:
         return 'ok'
     else:
         return 'error'
