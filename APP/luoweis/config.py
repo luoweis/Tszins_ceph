@@ -25,5 +25,13 @@ adminsEmail = {
 #定义管理员的密码
 admins = {
     'luoweis':'a44df41524d1b7198e6e2c3cda445caf',
-    'test':'a44df41524d1b7198e6e2c3cda445caf'
+    'test':'a44df41524d1b7198e6e2c3cda445caf',
+    'luyan':'21c1d68ef134b83673c7e4dc85465401'#luayan123456
+
 }
+#定义qcloud,腾讯云对象存储cos
+qcloud_appid = 1252973300
+qcloud_secret_id = u'AKIDsb9VfcrwISSIzUrwadb8Vl084JPMomCP'
+qcloud_secret_key = u'EVdeU8ZorhLn5Xs12v79zzqV0IOuIZii'
+qcloud_region_info = "tj"
+

@@ -134,6 +134,14 @@ function playOnPhone(url){
         text: web_server+url
     });
 }
+function playOnPhoneQcloud(url){
+
+    swal('获取二维码_来源腾讯云CDN地址','<div  style="width:200px;height: 200px;margin-left:180px;" id="showqrcode1"><canvas width="200" height="200"></canvas></div>','success')
+    res = $("#showqrcode1").erweima({
+        label: 'TszinS',
+        text: web_server+url
+    });
+}
 
 //发送邮件
 function sendEmail(url) {

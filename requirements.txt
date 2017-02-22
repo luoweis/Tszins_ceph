@@ -4,3 +4,4 @@ filechunkio
 redis
 hiredis
 flask-mail
+qcloud_cos_v4

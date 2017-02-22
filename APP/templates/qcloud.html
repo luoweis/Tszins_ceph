@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block head %}
+    <script src="../static/sweetalert2/sweetalert2.js"></script>
+    <link rel="stylesheet" href="../static/sweetalert2/sweetalert2.css">
+    <link rel="stylesheet" href="../static/sweetalert2/buttons.css">  <!--按钮的样式,可以自定义其他的按钮样式-->
+    <link rel="stylesheet" href="../static/table/css/bootstrap-table.min.css">
+{% endblock %}
+{% block content %}
+    <!-- / nav -->
+    <section id="content">
+        <section class="main padder">
+            <div class="clearfix">
+                <h4><i class="icon-table"></i>tszins001</h4>
+                <a href="javascript:void(0);"><i class="icon-cloud"></i>进入腾讯云官网</a>
+            </div>
+            <div class="col-lg-12">
+                <div class="pull-out m-t-small">
+                    <table id="table"
+                           data-toggle="table"
+                           data-show-columns="false"
+                           data-search="true"
+                           data-show-refresh="false"
+                           data-show-toggle="false"
+                           data-pagination="true"
+                           data-height="500">
+                        <thead>
+                        <tr>
+                            <th data-field="key" data-formatter="idFormatter">
+                                CDN地址
+                            </th>
+                            <th data-filed="tag">打标签</th>
+                            <th data-filed="paly">查看</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for key in qcloud %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>tag</td>
+                                <td>
+                                    <a href="javascript:void(0);" onclick="playOnPhoneQcloud('/playOnPhoneQcloud?cdn={{ key }}')"><i class=" icon-qrcode"></i>手机扫描二维码</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    <div style="width:200px;height: 200px;display: none" id="getcanvastomail">
+        <canvas width="200" height="200" id="canvascontent"></canvas>
+    </div>
+    {% block scripts %}
+        <script src="../static/luoweis.js"></script>
+        <script src="../static/table/js/jquery.base64.js"></script>
+        <script src="../static/table/js/bootstrap-table.js"></script>
+        <script src="../static/qrcode/js/jqueryqr.js"></script>
+        <script src="../static/qrcode/js/qrcode.js"></script>
+    {% endblock %}
+{% endblock %}

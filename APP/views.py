@@ -8,6 +8,7 @@ from functools import wraps
 from luoweis.object_storage import object_storage
 from luoweis.tszins_redis import tszins_redis
 from luoweis.sendEmail import sendEmail
+from luoweis.qcloud import qcloud_tszins
 #引入全局配置文件
 import luoweis.config
 from werkzeug.utils import secure_filename
@@ -146,6 +147,7 @@ def keyUpload(bucket):
 
 ##定义一个用来检查上传的文件是否已经存在的路由
 @app.route('/filenameCheck/<bucket>')
+@login_required
 def filenameCheck(bucket):
     filename = request.args['file']
     res = tszins_redis.keyExistsInHset(bucket, filename)
@@ -156,12 +158,14 @@ def filenameCheck(bucket):
 
 #创建一个bucket
 @app.route('/addBucket')
+@login_required
 def addBucket():
     bucket = request.args['bucket']
     objs.bucketCreate(bucket)
     return 'ok'
 #删除一个bucket
 @app.route('/delBucket')
+@login_required
 def delBucket():
     bucket = request.args['bucket']
     objs.bucketDel(bucket)
@@ -175,6 +179,7 @@ def listKeys(bucket):
     return render_template('keys.html',bucket = bucket,keys = keys)
 #
 @app.route('/geturl/<bucket>')
+@login_required
 def geturl(bucket):
     key = request.args['key']
     choose = request.args['choose']
@@ -188,6 +193,7 @@ def geturl(bucket):
         pass
 #删除指定bucket中的key
 @app.route('/key/delete/<bucket>')
+@login_required
 def deleteKey(bucket):
     key = request.args['key']
     size = request.args['size']
@@ -238,6 +244,20 @@ def playVideoOnPhone(bucket):
     else:
         pass
     return  render_template('play.html',url=url)
+#qcloud
+@app.route('/qcloud')
+@login_required
+def qcloud():
+    qcloud = qcloud_tszins()
+    res = qcloud.list_floder()
+    #data = res['data']['infos']
+    #data = json.dumps(data)
+    #res = json.dumps(res)
+    return render_template('qcloud.html',qcloud=res)
+@app.route('/playOnPhoneQcloud')
+def playOnPhoneQcloud():
+    url = request.args['cdn']
+    return render_template('play.html',url = url)
 
 ######-------------- single  test-----------###
 @app.route('/redistest')
