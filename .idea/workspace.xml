@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3884015a-60d6-45ef-a390-28f495b035a1" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gunicorn.conf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/start_gunicorn.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/runserver.py" afterPath="$PROJECT_DIR$/manage.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/luoweis/tszins_session.py" afterPath="$PROJECT_DIR$/APP/luoweis/tszins_session.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/views.py" afterPath="$PROJECT_DIR$/APP/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/luoweis/config.py" afterPath="$PROJECT_DIR$/APP/luoweis/config.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -99,12 +101,14 @@
         <option value="$PROJECT_DIR$/APP/luoweis/qcloud.py" />
         <option value="$PROJECT_DIR$/APP/static/luoweis.js" />
         <option value="$PROJECT_DIR$/APP/templates/qcloud.html" />
-        <option value="$PROJECT_DIR$/APP/luoweis/config.py" />
         <option value="$PROJECT_DIR$/APP/templates/base.html" />
         <option value="$PROJECT_DIR$/APP/__init__.py" />
         <option value="$PROJECT_DIR$/runserver.py" />
         <option value="$PROJECT_DIR$/APP/views.py" />
         <option value="$PROJECT_DIR$/APP/luoweis/tszins_session.py" />
+        <option value="$PROJECT_DIR$/APP/luoweis/config.py" />
+        <option value="$PROJECT_DIR$/gunicorn.conf" />
+        <option value="$PROJECT_DIR$/start_gunicorn.sh" />
       </list>
     </option>
   </component>
@@ -115,8 +119,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="38" />
-    <option name="y" value="22" />
+    <option name="x" value="611" />
+    <option name="y" value="56" />
     <option name="width" value="1402" />
     <option name="height" value="878" />
   </component>
@@ -147,38 +151,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="tszins_ceph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tszins_ceph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tszins_ceph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="APP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tszins_ceph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tszins_ceph" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="APP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luoweis" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -434,7 +406,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="ceph_api" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/runserver.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -457,7 +429,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="38" y="22" width="1402" height="878" extended-state="6" />
+    <frame x="611" y="56" width="1402" height="878" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17475036" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -513,25 +485,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/APP/static/plugin/login/js/scripts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APP/static/plugin/play/Tszins.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APP/static/plugin/play/css/video-js.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="0" column="1718" lean-forward="false" selection-start-line="0" selection-start-column="1718" selection-end-line="0" selection-end-column="1718" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/APP/static/plugin/play/js/video.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -702,13 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/APP/luoweis/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="48" lean-forward="false" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/APP/templates/qcloud.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -744,13 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/runserver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/APP/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
@@ -775,6 +714,48 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP/luoweis/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="46" lean-forward="true" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#46#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gunicorn.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="26" lean-forward="true" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start_gunicorn.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="71" lean-forward="true" selection-start-line="1" selection-start-column="71" selection-end-line="1" selection-end-column="71" />
           <folding />
         </state>
       </provider>

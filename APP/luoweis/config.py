@@ -26,7 +26,7 @@ adminsEmail = {
 admins = {
     'luoweis':'a44df41524d1b7198e6e2c3cda445caf',
     'test':'a44df41524d1b7198e6e2c3cda445caf',
-    'luyan':'21c1d68ef134b83673c7e4dc85465401'#luayan123456
+    'luyan':'21c1d68ef134b83673c7e4dc85465401'#**123456
 
 }
 #定义qcloud,腾讯云对象存储cos
