@@ -7,11 +7,12 @@ from flask import abort, redirect, url_for,session,escape,request
 from functools import wraps
 from luoweis.object_storage import object_storage
 from luoweis.tszins_redis import tszins_redis
-from luoweis.sendEmail import sendEmail
 from luoweis.qcloud import qcloud_tszins
 #引入全局配置文件
 import luoweis.config
 from werkzeug.utils import secure_filename
+#redis session
+from luoweis.tszins_session import RedisSessionInterface
 
 #定义过滤器
 #过滤器 keySize
@@ -36,7 +37,7 @@ def fileType(file):
         return False
 ''' --以上是定义的过滤器-- '''
 
-
+app.session_interface = RedisSessionInterface()
 ALLOWED_EXTENSIONS = set(['txt','pdf','png','jpg','jpeg','gif','mp4','ogv','webm'])
 app.config['UPLOAD_FOLDER'] = luoweis.config.UPLOAD_FOLDER
 #验证登录的装饰器
