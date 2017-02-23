@@ -36,7 +36,7 @@ def fileType(file):
     else:
         return False
 ''' --以上是定义的过滤器-- '''
-
+#定义session的接口方式，这里将session统一存储到redis数据库中。session的有效期为1天
 app.session_interface = RedisSessionInterface()
 ALLOWED_EXTENSIONS = set(['txt','pdf','png','jpg','jpeg','gif','mp4','ogv','webm'])
 app.config['UPLOAD_FOLDER'] = luoweis.config.UPLOAD_FOLDER

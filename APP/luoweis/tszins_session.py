@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import config
 import pickle
 from datetime import timedelta
 from uuid import uuid4
@@ -10,7 +9,13 @@ from flask.sessions import SessionInterface, SessionMixin
 import sys
 reload(sys)
 
-
+'''
+Flask 默认的session是将cookie 内容保存到内存中，而session是单进程，如果我们在实际生产环境下部署Flask，使用的Gunicorn作为uwsgi，启动多进程
+的时候，这时候就会出现一种现象，要求你反复登录。因为session不是进程间共享的。
+所以这里就使用Redis作为session的存储，能够在多进程和多服务器间做到共享。
+Redis session 有效期为1天
+so enjoy it!
+'''
 class RedisSession(CallbackDict, SessionMixin):
 
     def __init__(self, initial=None, sid=None, new=False):
