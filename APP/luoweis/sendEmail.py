@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from APP import app
 from flask_mail import Mail,Message
-from flask import request,template_rendered
+from flask import request
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')

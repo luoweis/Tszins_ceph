@@ -28,18 +28,28 @@
                             <th data-field="key" data-formatter="idFormatter">
                                 CDN地址
                             </th>
-                            <th data-filed="tag">打标签</th>
-                            <th data-filed="paly">查看</th>
-
+                            <th data-filed="file">视频大小</th>
+                            <th data-filed="time">视频时长</th>
+                            <th data-filed="view">查看</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for key in qcloud %}
+                        {% for key in qcloud |dictsort %}
                             <tr>
-                                <td>{{ key }}</td>
-                                <td>tag</td>
+                                <td>{{ key[0] }}</td>
+                                <td>{{ key[1].filelen }}<strong>B</strong></td>
+                                {% if key[1].biz_attr %}
                                 <td>
-                                    <a href="javascript:void(0);" onclick="playOnPhoneQcloud('/playOnPhoneQcloud?cdn={{ key }}')"><i class=" icon-qrcode"></i>手机扫描二维码</a>
+                                    <a>{{ key[1].biz_attr }}<strong>秒</strong></a>
+                                    <a href="javascript:void(0);" onclick="timelen('{{ key[0] }}')" >修改</a>
+                                </td>
+                                {% else %}
+                                  <td>
+                                      <a href="javascript:void(0);" onclick="timelen('{{ key[0] }}')">输入</a>
+                                  </td>
+                                {% endif %}
+                                <td>
+                                    <a href="javascript:void(0);" onclick="playOnPhoneQcloud('/playOnPhoneQcloud?cdn={{ key[0] }}')"><i class=" icon-qrcode"></i>手机扫描二维码</a>
                                 </td>
                             </tr>
                         {% endfor %}

@@ -186,7 +186,7 @@ function sendEmail(url) {
                     '失败',
                     '发送'+email+'邮件失败',
                     'error'
-                    )
+                )
             }
         })
     })
@@ -311,12 +311,12 @@ function uploadSubmit(bucket){
     var fileName = form.get('file').name;//获取到form表单中file的文件名称
     var file = document.getElementById("keyName").files[0];
     if (file) {
-          var fileSize = 0;
-          if (file.size > 1024 * 1024)
+        var fileSize = 0;
+        if (file.size > 1024 * 1024)
             fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
-          else
+        else
             fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
-        }
+    }
     $.ajax({
         url:'/keyUpload/' + bucket,
         type: 'POST',
@@ -354,4 +354,42 @@ function uploadSubmit(bucket){
             )
         }
     })
+}
+//qcloud
+//qcloud timelen
+function timelen(key){
+    swal({
+        title: '输入时长',
+        html:                                                       //html标签，在弹出框中直接写相关代码，相当于可以再嵌套一个网页！
+
+            '<input id="swal-input1" class="swal2-input" autofocus required />',
+        preConfirm: function() {
+            return new Promise(function(resolve) {       //默认信息不能为空
+                resolve([
+                    $('#swal-input1').val()  //获取文本值
+                ])
+            })
+        }
+    }).then(function(result) {
+        //swal(JSON.stringify(result))  //转换成json输出
+        var res = result[0].split(".");
+        seconds = parseInt(res[0])*60+parseInt(res[1]);
+        $.ajax({
+            url: '/qcloud/biz_attr?key='+key+'&biz='+seconds,
+            type:"GET",
+            success:function () {
+                swal({
+                    title: '成功',
+                    type: 'success',
+                    timer:2000
+                    });
+            reload();
+            }
+
+        })
+    })
+}
+//格式化时间戳
+function getLocalTime(nS) {
+    return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
 }

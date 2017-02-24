@@ -4,7 +4,7 @@ from APP import app
 import qcloud_cos
 from qcloud_cos import cos_request
 import config
-import sys
+import sys,os
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -22,7 +22,8 @@ class qcloud_tszins():
         return cos_client
     def list_floder(self):
         cos_client = self.connection()
-        dirlist=[]
+        dirdict = {}
+
         def get(name=''):
             request = cos_request.ListFolderRequest(bucket_name=self.bucket, cos_path=self.os_path + name)
             res = cos_client.list_folder(request)
@@ -34,6 +35,21 @@ class qcloud_tszins():
                         name2=name+name1
                         get(name2)
                     else:
-                        dirlist.append(self.cdn+name+name1)
+                        key = self.cdn+name+name1
+                        res = self.key_info(key)
+                        dirdict[key] = res['data']
+
         get()
-        return dirlist
+        return dirdict
+    def key_info(self,key):
+        cos_client = self.connection()
+        cos_path = key.replace('https://cdn.tszins.tv','')
+        request = cos_request.StatFileRequest(self.bucket, cos_path=cos_path)
+        res = cos_client.stat_file(request)
+        return res
+    def modifity_key(self,key,biz_attr):
+        cos_client = self.connection()
+        cos_path = key.replace('https://cdn.tszins.tv', '')
+        request = cos_request.UpdateFileRequest(self.bucket,cos_path=cos_path)
+        request.set_biz_attr(biz_attr)
+        cos_client.update_file(request)

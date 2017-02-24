@@ -79,7 +79,8 @@ def login():
 def lougout():
     #将用户名从session中剔除
     session.pop('username',None)
-    return redirect(url_for('index'))
+    #return redirect(url_for('index'))
+    return redirect('/')
 #
 @app.route('/')
 @login_required
@@ -251,6 +252,7 @@ def playVideoOnPhone(bucket):
 def qcloud():
     qcloud = qcloud_tszins()
     res = qcloud.list_floder()
+    #res = sorted(res.iteritems(), key=lambda d: d[0])#排序
     #data = res['data']['infos']
     #data = json.dumps(data)
     #res = json.dumps(res)
@@ -260,10 +262,20 @@ def playOnPhoneQcloud():
     url = request.args['cdn']
     return render_template('play.html',url = url)
 
+@app.route('/qcloud/biz_attr')
+@login_required
+def biz_attr():
+    key = request.args['key']
+    biz_attr = request.args['biz']
+    qcloud = qcloud_tszins()
+    qcloud.modifity_key(key,biz_attr)#修改qcloud的biz_attr属性
+    r = tszins_redis.connection()
+    r.hset('qcloud_time',key,biz_attr)
+    return 'ok'
 ######-------------- single  test-----------###
 @app.route('/redistest')
 def testSingle():
-    res = json.dumps(tszins_redis.keyFromRedisUseHset('tszins-for-luoweis'))
+    res = json.dumps(tszins_redis.keyFromRedisUseHset('qcloud_time'))
     # res = tszins_redis.keyExistsInHset('606007.gif')
     # if res:
     #     return "yes"
@@ -273,6 +285,7 @@ def testSingle():
 
 @app.route('/single1')
 def single1():
-    bucket = 'tszins-for-test'
-    acl = objs.getBucketAcl(bucket)
-    return acl
+    qcloud = qcloud_tszins()
+    res = qcloud.list_floder()
+    res = sorted(res.iteritems(), key=lambda d: d[0])
+    return repr(res)
