@@ -247,16 +247,18 @@ def playVideoOnPhone(bucket):
         pass
     return  render_template('play.html',url=url)
 #qcloud
-@app.route('/qcloud')
+@app.route('/qcloud/video')
 @login_required
 def qcloud():
     qcloud = qcloud_tszins()
-    res = qcloud.list_floder()
-    #res = sorted(res.iteritems(), key=lambda d: d[0])#排序
-    #data = res['data']['infos']
-    #data = json.dumps(data)
-    #res = json.dumps(res)
+    res = qcloud.list_floder_video()
     return render_template('qcloud.html',qcloud=res)
+@app.route('/qcloud/tszins_cms')
+@login_required
+def qcloud_cms():
+    qcloud = qcloud_tszins(u'/tszins_cms/')
+    res = qcloud.list_floder_cms()
+    return render_template('qcloud_cms.html',qcloud=res)
 @app.route('/playOnPhoneQcloud')
 def playOnPhoneQcloud():
     url = request.args['cdn']

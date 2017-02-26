@@ -389,6 +389,55 @@ function timelen(key){
         })
     })
 }
+
+//qcloud cms modify
+function cmsModify(key){
+    swal({
+        title: '输入图片描述',
+        html:                                                       //html标签，在弹出框中直接写相关代码，相当于可以再嵌套一个网页！
+
+            '<input id="swal-input1" class="swal2-input" autofocus required />',
+        preConfirm: function() {
+            return new Promise(function(resolve) {       //默认信息不能为空
+                resolve([
+                    $('#swal-input1').val()  //获取文本值
+                ])
+            })
+        }
+    }).then(function(result) {
+        //swal(JSON.stringify(result))  //转换成json输出
+        content = result[0];
+        if (content){
+            $.ajax({
+            url: '/qcloud/biz_attr?key='+key+'&biz='+content,
+            type:"GET",
+            success:function () {
+                swal({
+                    title: '成功',
+                    type: 'success',
+                    timer:2000
+                    });
+            reload();
+            }
+        })
+        }
+    })
+}
+//qcloud
+function cmsView(url,size){
+    if (size<102400){
+        swal({
+        title:'图片内容',
+        html:
+        '<img src="'+url+'"  alt="tszins" />'
+    })
+    }else{
+    swal({
+        title:'图片内容',
+        html:
+        '<img src="'+url+'"  alt="tszins" height="100%" width="100%"/>'
+    })}
+}
 //格式化时间戳
 function getLocalTime(nS) {
     return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
