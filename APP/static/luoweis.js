@@ -104,7 +104,30 @@ function deleteKey(deleteUrl){
     })
 }
 
-
+function viewPicture(bucket,name,acl,size){
+    url = '/geturl/'+bucket+'?key='+name+'&choose='+acl;
+    $.ajax({
+        url:url,
+        type:'GET',
+        success:function (res) {
+            if (size<102400){
+                swal({
+                    title:'图片内容',
+                    html:
+                    '<img src="'+res+'"  alt="tszins" />'
+                })
+            }else{
+                swal({
+                    title:'图片内容',
+                    html:
+                    '<img src="'+res+'"  alt="tszins" height="100%" width="100%"/>'
+                })}
+        },
+        error:function(){
+            alert('error');
+        }
+    })
+}
 function reload() {
     window.location.reload();
 }
@@ -382,8 +405,8 @@ function timelen(key){
                     title: '成功',
                     type: 'success',
                     timer:2000
-                    });
-            reload();
+                });
+                reload();
             }
 
         })
@@ -409,34 +432,35 @@ function cmsModify(key){
         content = result[0];
         if (content){
             $.ajax({
-            url: '/qcloud/biz_attr?key='+key+'&biz='+content,
-            type:"GET",
-            success:function () {
-                swal({
-                    title: '成功',
-                    type: 'success',
-                    timer:2000
+                url: '/qcloud/biz_attr?key='+key+'&biz='+content,
+                type:"GET",
+                success:function () {
+                    swal({
+                        title: '成功',
+                        type: 'success',
+                        timer:2000
                     });
-            reload();
-            }
-        })
+                    reload();
+                }
+            })
         }
     })
 }
 //qcloud
 function cmsView(url,size){
+
     if (size<102400){
         swal({
-        title:'图片内容',
-        html:
-        '<img src="'+url+'"  alt="tszins" />'
-    })
+            title:'图片内容',
+            html:
+            '<img src="'+url+'"  alt="tszins" />'
+        })
     }else{
-    swal({
-        title:'图片内容',
-        html:
-        '<img src="'+url+'"  alt="tszins" height="100%" width="100%"/>'
-    })}
+        swal({
+            title:'图片内容',
+            html:
+            '<img src="'+url+'"  alt="tszins" height="100%" width="100%"/>'
+        })}
 }
 //格式化时间戳
 function getLocalTime(nS) {

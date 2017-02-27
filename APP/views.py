@@ -30,11 +30,14 @@ def keySize(value,B):
 @app.template_filter('fileType')
 def fileType(file):
     html5Video=['mp4','ogv','webm']
+    html5Picture=['gif','png','jpg']
     res = file.split('.')[-1]#以点为分隔符
     if res in html5Video:
-        return True
+        return 'video'
+    elif res in html5Picture:
+        return 'picture'
     else:
-        return False
+        return 'others'
 ''' --以上是定义的过滤器-- '''
 #定义session的接口方式，这里将session统一存储到redis数据库中。session的有效期为1天
 app.session_interface = RedisSessionInterface()

@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import sys
+import sys,os
 reload(sys)
 sys.setdefaultencoding('utf-8')
 #定义上传到web服务器端的目录位置
-UPLOAD_FOLDER='/Users/luoweis/tszins'
+UPLOAD_FOLDER=os.path.abspath(os.curdir)+'/APP/upload'
+
 #定义redis的参数
 redis_server = '192.168.1.21'
 redis_port = 9736
