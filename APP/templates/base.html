@@ -4,212 +4,132 @@
 
 <head>
 
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Tszins</title>
+    <title>Tszins</title>
 
-  <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
+    <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../static/css/style.css">
 
-	<link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/plugin.css">
 
-  <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/landing.css">
 
-	<link rel="stylesheet" href="../static/css/style.css">
-
-  <link rel="stylesheet" href="../static/css/plugin.css">
-
-  <link rel="stylesheet" href="../static/css/landing.css">
-
-  <!--[if lt IE 9]>
+    <!--[if lt IE 9]>
 
     <script src="../static/js/ie/respond.min.js"></script>
 
     <script src="../static/js/ie/html5.js"></script>
 
   <![endif]-->
-{% block head %} {% endblock %}
+    {% block head %} {% endblock %}
 </head>
 
 <body>
 
-  <!-- header -->
+<!-- header -->
 
-	<header id="header" class="navbar">
+<header id="header" class="navbar">
 
     <ul class="nav navbar-nav navbar-avatar pull-right">
 
-      <li class="dropdown">
+        <li class="dropdown">
 
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-          <span class="hidden-sm-only">{{ session.username }}</span>
+                <span class="hidden-sm-only">{{ session.username }}</span>
 
-          <span class="thumb-small avatar inline"><img src="../static/images/luoweis.png" alt="Mika Sokeil" class="img-circle"></span>
+                <span class="thumb-small avatar inline"><img src="../static/images/luoweis.png" alt="Mika Sokeil" class="img-circle"></span>
 
-          <b class="caret hidden-sm-only"></b>
+                <b class="caret hidden-sm-only"></b>
 
-        </a>
+            </a>
 
-        <ul class="dropdown-menu">
+            <ul class="dropdown-menu">
 
-          <li><a href="/logout">Logout</a></li>
+                <li><a href="/logout">退出登录</a></li>
+                <li><a href="/userchange">修改密码</a></li>
 
-        </ul>
+            </ul>
 
-      </li>
+        </li>
 
     </ul>
 
-    <a class="navbar-brand" href="#" style="color:red">Tszins</a>
+    <a class="navbar-brand" href="／" style="color:red">Tszins</a>
 
     <button type="button" class="btn btn-link pull-left nav-toggle hidden-lg" data-toggle="class:slide-nav slide-nav-left" data-target="body">
 
-      <i class="icon-reorder icon-xlarge text-default"></i>
-
+        <i class="icon-reorder icon-xlarge text-default"></i>
     </button>
+</header>
 
-    <ul class="nav navbar-nav hidden-sm">
+<!-- / header -->
+<!-- nav -->
+<nav id="nav" class="nav-primary visible-lg nav-vertical">
 
-      <li class="dropdown shift" data-toggle="shift:appendTo" data-target=".nav-primary .nav">
+    <ul class="nav" data-spy="affix" data-offset-top="50">
 
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cog icon-xlarge visible-sm visible-sm-inline"></i>Settings <b class="caret hidden-sm-only"></b></a>
-
-        <ul class="dropdown-menu">
-
-          <li>
-
-            <a href="#" data-toggle="class:navbar-fixed" data-target='body'>Navbar
-
-              <span class="text-active">auto</span>
-
-              <span class="text">fixed</span>
-
-            </a>
-
-          </li>
-
-          <li class="visible-lg">
-
-            <a href="#" data-toggle="class:nav-vertical" data-target="#nav">Nav
-
-              <span class="text-active">vertical</span>
-
-              <span class="text">horizontal</span>
-
-            </a>
-
-          </li>
-
-          <li class="divider hidden-sm"></li>
-
-          <li class="dropdown-header">Colors</li>
-
-          <li>
-
-            <a href="#" data-toggle="class:bg bg-black" data-target='.navbar'>Navbar
-
-              <span class="text-active">white</span>
-
-              <span class="text">inverse</span>
-
-            </a>
-
-          </li>
-
-          <li>
-
-            <a href="#" data-toggle="class:bg-light" data-target='#nav'>Nav
-
-              <span class="text-active">inverse</span>
-
-              <span class="text">light</span>
-
-            </a>
-
-          </li>
-
-        </ul>
-
-      </li>
-
+        <li class="active"><a href="/"><i class="icon-dashboard icon-xlarge"></i>Dashboard</a></li>
+        <li class="dropdown-submenu">
+            <a href="#"><i class="icon-cloud icon-xlarg"></i>qcloud</a>
+            <ul class="dropdown-menu">
+                <li><a href="/qcloud/video"><i class="icon-film"></i>视频</a></li>
+                <li><a href="/qcloud/tszins_cms"><i class="icon-picture"></i>图片</a></li>
+            </ul>
+        </li>
     </ul>
+</nav>
 
-    <form class="navbar-form pull-left shift" action="" data-toggle="shift:appendTo" data-target=".nav-primary">
+<!-- / nav -->
+{% block content %} {% endblock %}
+<!-- footer -->
+<footer id="footer">
 
-      <i class="icon-search text-muted"></i>
+    <div class="text-center padder clearfix">
 
-      <input type="text" class="input-small form-control" placeholder="Search">
+        <p>
 
-    </form>
+            <small>&copy; Tszins 2017, 青岛三藏信息科技有限公司</small><br><br>
+        </p>
 
-    </header>
+    </div>
 
-  <!-- / header -->
+</footer>
 
-  <!-- nav -->
+<a href="#" class="hide slide-nav-block" data-toggle="class:slide-nav slide-nav-left" data-target="body"></a>
 
-  <nav id="nav" class="nav-primary visible-lg nav-vertical">
+<!-- / footer -->
 
-      <ul class="nav" data-spy="affix" data-offset-top="50">
+<script src="../static/js/jquery.min.js"></script>
 
-          <li class="active"><a href="/"><i class="icon-dashboard icon-xlarge"></i>Dashboard</a></li>
-          <li class="dropdown-submenu">
-              <a href="#"><i class="icon-cloud icon-xlarg"></i>qcloud</a>
-              <ul class="dropdown-menu">
-                  <li><a href="/qcloud/video"><i class="icon-film"></i>视频</a></li>
-                  <li><a href="/qcloud/tszins_cms"><i class="icon-picture"></i>图片</a></li>
-              </ul>
-          </li>
-      </ul>
-  </nav>
+<!-- Bootstrap -->
 
-  <!-- / nav -->
-  {% block content %} {% endblock %}
-  <!-- footer -->
-  <footer id="footer">
+<script src="../static/js/bootstrap.js"></script>
 
-      <div class="text-center padder clearfix">
+<!-- app -->
 
-          <p>
+<script src="../static/js/app.js"></script>
 
-              <small>&copy; Tszins 2017, 青岛三藏信息科技有限公司</small><br><br>
-          </p>
+<script src="../static/js/app.plugin.js"></script>
 
-      </div>
-
-  </footer>
-
-  <a href="#" class="hide slide-nav-block" data-toggle="class:slide-nav slide-nav-left" data-target="body"></a>
-
-  <!-- / footer -->
-
-	<script src="../static/js/jquery.min.js"></script>
-
-  <!-- Bootstrap -->
-
-  <script src="../static/js/bootstrap.js"></script>
-
-  <!-- app -->
-
-  <script src="../static/js/app.js"></script>
-
-  <script src="../static/js/app.plugin.js"></script>
-
-  <script src="../static/js/app.data.js"></script>
+<script src="../static/js/app.data.js"></script>
 {% block scripts %}{% endblock %}
 
 
-  <!-- Sparkline Chart -->
+<!-- Sparkline Chart -->
 
-  <script src="../static/js/charts/sparkline/jquery.sparkline.min.js"></script>
+<script src="../static/js/charts/sparkline/jquery.sparkline.min.js"></script>
 
-  <!-- Easy Pie Chart -->
+<!-- Easy Pie Chart -->
 
-  <script src="../static/js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
+<script src="../static/js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
 
-  <script src="../static/js/ie/excanvas.js"></script>
+<script src="../static/js/ie/excanvas.js"></script>
 
 </body>
 
