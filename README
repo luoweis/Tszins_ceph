@@ -1,1 +1,11 @@
 Tszins ceph web admin
+服务端部署方案
+放置nginx作为负载均衡使用-使用的openresty方便以后扩展lua
+nginx设置动态组。
+python Flask使用uwsgi，这里使用gunicorn，部署快捷方便，每个gunicorn进程开启一个work，端口为8080，不同的gunicorn不同的端口号
+python 环境使用virtual
+
+pip install virtualenv
+cd Tszins_ceph1
+virtualenv venv1
+source venv1/bin/activate

@@ -79,11 +79,12 @@ def login():
     return render_template('login.html')
 #退出登录
 @app.route('/logout')
+@login_required
 def lougout():
-    #将用户名从session中剔除
+    #将用户信息在session中删除
     session.pop('user',None)
-    #return redirect(url_for('index'))
-    return redirect('/')
+    return render_template('login.html')
+    #return redirect('/')
 #修改密码
 @app.route('/userchange')
 @login_required
