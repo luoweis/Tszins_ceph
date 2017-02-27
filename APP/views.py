@@ -21,11 +21,11 @@ from luoweis.tszins_session import RedisSessionInterface
 def keySize(value,B):
 
     if float(value)/(B**3) >=1:
-        res = ('%.1f%s'%((float(value)/(B**3)),'Gb'))
+        res = ('%.1f%s'%((float(value)/(B**3)),'GB'))
     elif float(value)/(B**2) >=1:
-        res = ('%.1f%s' % ((float(value) / (B ** 2)), 'Mb'))
+        res = ('%.1f%s' % ((float(value) / (B ** 2)), 'MB'))
     else:
-        res = ('%.1f%s'%((float(value)/(B)),'Kb'))
+        res = ('%.1f%s'%((float(value)/(B)),'KB'))
     return res
 @app.template_filter('fileType')
 def fileType(file):
@@ -47,7 +47,7 @@ app.config['UPLOAD_FOLDER'] = luoweis.config.UPLOAD_FOLDER
 def login_required(f):
     @wraps(f)
     def decorated_function(*args,**kwargs):
-        if 'username' not in session:
+        if 'user' not in session:
             #return redirect(url_for('login',next=request.url))
             return redirect(url_for('login'))
         return f(*args,**kwargs)
@@ -71,8 +71,8 @@ def login():
         m1.update(password)
         if username =='':
             return redirect(url_for('login'))
-        if luoweis.config.admins.has_key(username) and  m1.hexdigest() == luoweis.config.admins[username]:
-            session['username']  = username
+        if luoweis.config.admins.has_key(username) and  m1.hexdigest() == luoweis.config.admins[username]['password']:
+            session['user']  = luoweis.config.admins[username]
             return redirect(url_for('index'))
         else:
             return redirect(url_for('login'))
@@ -81,15 +81,21 @@ def login():
 @app.route('/logout')
 def lougout():
     #将用户名从session中剔除
-    session.pop('username',None)
+    session.pop('user',None)
     #return redirect(url_for('index'))
     return redirect('/')
+#修改密码
+@app.route('/userchange')
+@login_required
+def userchange():
+    username = session['user']['username']
+    luoweis.config.admins[username]['password'] = ''
 #
 @app.route('/')
 @login_required
 def index():
     buckets = objs.bucketsList()
-    return render_template('index.html',buckets = buckets)
+    return render_template('index.html',buckets = buckets,total_save = luoweis.config.ceph_save_total_KB)
 #上传接口
 #上传到服务器的本地硬盘上
 @app.route('/upload',methods=['POST'])
