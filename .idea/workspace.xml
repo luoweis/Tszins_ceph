@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3884015a-60d6-45ef-a390-28f495b035a1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/templates/base.html" afterPath="$PROJECT_DIR$/APP/templates/base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/luoweis/config.py" afterPath="$PROJECT_DIR$/APP/luoweis/config.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,7 +16,30 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="config.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/APP/luoweis/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="30" column="52" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/APP/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-212">
+              <caret line="30" column="19" lean-forward="true" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+              <folding>
+                <element signature="e#46#65#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -105,8 +128,8 @@
         <option value="$PROJECT_DIR$/APP/static/luoweis.js" />
         <option value="$PROJECT_DIR$/APP/templates/keys.html" />
         <option value="$PROJECT_DIR$/upload/READ" />
-        <option value="$PROJECT_DIR$/APP/luoweis/config.py" />
         <option value="$PROJECT_DIR$/APP/templates/base.html" />
+        <option value="$PROJECT_DIR$/APP/luoweis/config.py" />
       </list>
     </option>
   </component>
@@ -117,7 +140,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="73" />
+    <option name="x" value="-59" />
     <option name="y" value="22" />
     <option name="width" value="1402" />
     <option name="height" value="878" />
@@ -478,10 +501,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="73" y="22" width="1402" height="878" extended-state="0" />
-    <editor active="false" />
+    <frame x="-59" y="22" width="1402" height="878" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15121256" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15121256" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -780,25 +803,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/APP/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="44" lean-forward="false" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/APP/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="44" column="58" lean-forward="true" selection-start-line="44" selection-start-column="58" selection-end-line="44" selection-end-column="58" />
+        <state relative-caret-position="-212">
+          <caret line="30" column="19" lean-forward="true" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+          <folding>
+            <element signature="e#46#65#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APP/luoweis/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="17" lean-forward="true" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APP/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="44" lean-forward="false" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
+        <state relative-caret-position="450">
+          <caret line="30" column="52" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="52" />
           <folding />
         </state>
       </provider>

@@ -27,8 +27,8 @@ adminsEmail = {
 admins = {
     'luoweis':'a44df41524d1b7198e6e2c3cda445caf',
     'test':'a44df41524d1b7198e6e2c3cda445caf',
-    'luyan':'21c1d68ef134b83673c7e4dc85465401'#**123456
-
+    'luyan':'21c1d68ef134b83673c7e4dc85465401',#**123456
+    'guoyingchen':'8db497c587baf7f24b9ab5874cf4e26a'
 }
 #定义qcloud,腾讯云对象存储cos
 qcloud_appid = 1252973300
