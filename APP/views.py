@@ -83,8 +83,8 @@ def login():
 def lougout():
     #将用户信息在session中删除
     session.pop('user',None)
-    return render_template('login.html')
-    #return redirect('/')
+    #return render_template('login.html')
+    return redirect('/login')
 #修改密码
 @app.route('/userchange')
 @login_required
@@ -218,11 +218,11 @@ def deleteKey(bucket):
     r.decr(bucket+'_size',size)
     return key
 #邮箱验证的本地方法，邮箱是写死在程序中的
-@app.route('/confirmEmail')
+@app.route('/confirmEmail',methods=['POST'])
 @login_required
 def confirmEmail():
-    askEmail = request.args['email']
-    if luoweis.config.adminsEmail.has_key(askEmail) and luoweis.config.adminsEmail[askEmail] == session['username']:
+    askEmail = request.json.get('email')#前端通过POST传递过来的json数据，通过这种方法提取数据
+    if luoweis.config.adminsEmail.has_key(askEmail) and luoweis.config.adminsEmail[askEmail] == session['user']['username']:
         return 'ok'
     else:
         return 'error'

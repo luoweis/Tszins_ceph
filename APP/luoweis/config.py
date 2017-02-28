@@ -20,7 +20,7 @@ ceph_access_grantID = 'tszins'
 
 #定义管理员的邮箱
 adminsEmail = {
-        'luoweis@126.com':'luoweis',
+        'luoweis@126.com':u'施罗伟',
         'zhangsan@163.com':'zhangsan'
     }
 #定义管理员的密码

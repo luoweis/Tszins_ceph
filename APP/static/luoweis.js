@@ -87,8 +87,10 @@ function deleteKey(deleteUrl){
         allowOutsideClick: false
     }).then(function(email) {
         $.ajax({
-            url:'/confirmEmail?email=' + email,
-            type:'GET',
+            url:'/confirmEmail',
+            type:'POST',
+            data: JSON.stringify({email:email}),
+            contentType:'application/json',
             success:function (res) {
                 if (res == 'ok'){
                     doDeleteKey(deleteUrl);
@@ -348,7 +350,7 @@ function uploadSubmit(bucket){
         contentType:false,
         beforeSend:function () {
             swal({
-                title: "开始上传",
+                title: "正在上传",
                 html: "<p>文件:"+fileName+"</p>"+"<p>大小:"+fileSize+"</p>",
                 allowOutsideClick: false,
                 showConfirmButton: false,
