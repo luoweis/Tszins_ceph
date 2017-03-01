@@ -32,7 +32,42 @@ function getqrcode(url){
         }
     });
 }
+//创建一个文件夹
+function addFloder(bucket){
+    swal({
+        title: '输入文件夹名字',
+        html:                                                       //html标签，在弹出框中直接写相关代码，相当于可以再嵌套一个网页！
 
+            '<input id="swal-input1" class="swal2-input" autofocus required />',
+        preConfirm: function() {
+            return new Promise(function(resolve) {       //默认信息不能为空
+                resolve([
+                    $('#swal-input1').val()  //获取文本值
+                ])
+            })
+        }
+    }).then(function(result) {
+        //swal(JSON.stringify(result))  //转换成json输出
+        content = result[0];
+        if (content){
+            $.ajax({
+                url: '/addFloder',
+                type:"POST",
+                data: JSON.stringify({floder:content,bucket:bucket}),
+                contentType:'application/json',
+                success:function () {
+                    swal({
+                        title: '成功',
+                        type: 'success',
+                        timer:2000
+                    });
+                    reload();
+                }
+            })
+        }
+    })
+}
+//删除key
 function doDeleteKey(deleteUrl) {
     swal({
         title: '删除',
@@ -77,6 +112,7 @@ function doDeleteKey(deleteUrl) {
         }
     })
 }
+//执行删除的动作
 function deleteKey(deleteUrl){
     swal({
         title: '输入口令进行验证',  //标题
@@ -105,7 +141,7 @@ function deleteKey(deleteUrl){
         })
     })
 }
-
+//在html中点击展开图片
 function viewPicture(bucket,name,acl,size){
     url = '/geturl/'+bucket+'?key='+name+'&choose='+acl;
     $.ajax({
@@ -380,6 +416,7 @@ function uploadSubmit(bucket){
         }
     })
 }
+
 //qcloud
 //qcloud timelen
 function timelen(key){

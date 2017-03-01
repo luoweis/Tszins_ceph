@@ -120,6 +120,7 @@ def keyUpload(bucket):
         tag = request.form['tag']
         file = request.files['file']
         acl = request.form['acl']
+        group = request.form['group']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             #首先判断redis数据库中是否有该filename
@@ -128,8 +129,8 @@ def keyUpload(bucket):
             else:
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))#保存到本地路径中
                 file_size = os.stat(os.path.join(app.config['UPLOAD_FOLDER'], filename)).st_size#统计文件的大小
-                source_path = os.path.join(app.config['UPLOAD_FOLDER'],filename)
-                redis_value ={"size": file_size, "tag": tag}
+                source_path = os.path.join(app.config['UPLOAD_FOLDER'],filename)#这里添加文件夹头部信息如：/test/
+                redis_value ={"size": file_size, "tag": tag,"group":group}
                 if file_size >= 52428800:
                     res = objs.keyCreate(bucket,source_path,file_size)
                     if res:

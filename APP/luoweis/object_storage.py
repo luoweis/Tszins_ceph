@@ -104,7 +104,18 @@ class object_storage(object):
         k.set_contents_from_filename(source_path)
         return True
 
-
+    #创建一个文件夹
+    '''
+    对于对象存储而言，没有文件夹的概念，所有的文件以及文件夹都看成是一个object，但是object前面可以有字符“/”来表示文件夹意义的标示符，
+    因而本身s3是没有提供直接建文件夹的API的，但是利用前面的概念可以建一个结尾带有“/”的key，这个key的content为空，来象征性的标示文件夹
+    '''
+    def createFloder(self,bucket,name,prefix='',**kwargs):
+        conn = self.connection()
+        b = conn.get_bucket(bucket)
+        k = Key(b)
+        k.key = prefix+name+'/'
+        k.set_contents_from_string('')
+        return True
     #列出某个bucket中的所有的key的方法
     def keysList(self,bucketName):
         conn = self.connection()
@@ -115,16 +126,21 @@ class object_storage(object):
         red = tszins_redis.tszins_redis()
         r = red.connection()
         for key in keys:
-            acls = self.getKeyAcl(bucketName,key)#获得key的权限
-            value = r.hget(bucketName,key.name)#从redis中取得的结果是 str类型，value 的类型是str 需要json转换
-            value = eval(value)#通过eval方法将str 转换成字典
-            tag = value['tag']
-            if acls.has_key('others'):
-                d[key.name] = {'size':key.size,'date':key.last_modified,'acl':acls['others'],'tag':tag}
-            else:
-                d[key.name] = {'size': key.size, 'date': key.last_modified, 'acl': 'private','tag':tag}
-            L.append(d)
-            d={}
+                acls = self.getKeyAcl(bucketName,key)#获得key的权限
+                value = r.hget(bucketName,key.name)#从redis中取得的结果是 str类型，value 的类型是str 需要json转换
+                value = eval(value)#通过eval方法将str 转换成字典
+                tag = value['tag']
+                try:
+                    group = value['group']
+                except:
+                    group = ''
+
+                if acls.has_key('others'):
+                    d[key.name] = {'size':key.size,'date':key.last_modified,'acl':acls['others'],'tag':tag,'group':group}
+                else:
+                    d[key.name] = {'size': key.size, 'date': key.last_modified, 'acl': 'private','tag':tag,'group':group}
+                L.append(d)
+                d={}
         return L
 
     #下载指定的bucket下的某个key到ceph-obj服务器本地
