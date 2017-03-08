@@ -22,32 +22,81 @@
                            data-show-refresh="false"
                            data-show-toggle="false"
                            data-pagination="true"
-                           data-height="500">
+                           data-height="600">
                         <thead>
                         <tr>
-                            <th data-field="key" data-formatter="idFormatter">
+                            <th data-field="key" data-formatter="idFormatter" >
                                 CDN地址
                             </th>
+                            <th data-filed="cname">签约讲师</th>
+                            <th data-filed="ID">视频ID</th>
                             <th data-filed="file">视频大小</th>
                             <th data-filed="time">视频时长</th>
+                            <th data-filed="title">视频标题</th>
+                            <th data-filed="subtitle">视频副标题</th>
                             <th data-filed="view">查看</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for key in qcloud |dictsort %}
                             <tr>
-                                <td>{{ key[0] }}</td>
-                                <td>{{ key[1].filelen }}<strong>B</strong></td>
-                                {% if key[1].biz_attr %}
                                 <td>
-                                    <a>{{ key[1].biz_attr }}<strong>秒</strong></a>
-                                    <a href="javascript:void(0);" onclick="timelen('{{ key[0] }}')" >修改</a>
+                                    <a id="id{{ key[0] | qcloudFilter1 }}">{{ key[0] }}</a>
+                                    <a href='#{{ key[0] | qcloudFilter1 }}' data-toggle="modal" onclick="addColor('id{{ key[0] | qcloudFilter1 }}');" ><i class="icon-tag"></i></a>
+                                    <!-- .modal -->
+                                    <div id='{{ key[0] | qcloudFilter1 }}' class="modal fade">
+                                        <div class="modal-dialog pos-abt" style="margin-top:-235px; top:50%">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="myModalLabel">视频描述</h4>
+                                                </div>
+                                                <form role="form" enctype="multipart/form-data" name="cloudTag_Form" id="cloudTagForm">
+                                                    <div class="modal-body ">
+                                                        <div class="block form-group">
+                                                            <label class="control-label">视频CDN</label>
+                                                            <input type="text" class="form-control" placeholder="视频CDN" name="key" value="{{ key[0] }}" required>
+                                                        </div>
+                                                        <div class="block form-group">
+                                                            <label class="control-label">签约讲师</label>
+                                                            <input type="text" class="form-control" placeholder="输入签约讲师的中文名" name="cname" value="{{ key[1].custom_headers['x-cos-meta-cname'] }}" required>
+                                                        </div>
+                                                        <div class="block form-group">
+                                                            <label class="control-label">录制时间</label>
+                                                            <input type="text" class="form-control" placeholder="输入视频录制的时间" name="cdate" value="{{ key[1].custom_headers['x-cos-meta-cdate'] }}" required>
+                                                        </div>
+                                                        <div class="block form-group">
+                                                            <label class="control-label">视频ID</label>
+                                                            <input type="text" class="form-control" placeholder="视频ID" name="ID" value="{{ key[1].custom_headers['x-cos-meta-ID'] }}" required>
+                                                        </div>
+                                                        <div class="block form-group">
+                                                            <label class="control-label">视频时长</label>
+                                                            <input type="text" class="form-control" placeholder="输入视频时长，如时长21分45秒则填写：21:45" name="seconds" value="{{ key[1].custom_headers['x-cos-meta-seconds'] }}" required>
+                                                        </div>
+                                                        <div class="block form-group">
+                                                            <label class="control-label">视频主标题</label>
+                                                            <input type="text" class="form-control" placeholder="视频主标题" name="title" value="{{ key[1].custom_headers['x-cos-meta-title'] }}" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">视频副标题</label>
+                                                            <input type="text" class="form-control" placeholder="视频副标题" name="subtitle" value="{{ key[1].custom_headers['x-cos-meta-subtitle'] }}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer form-group">
+                                                        <button type="button"  data-dismiss="modal" onclick="removeColor('id{{ key[0] | qcloudFilter1 }}');">取消</button>
+                                                        <input type="button" value="submit" onclick="cloudTagSubmit();"/>
+                                                    </div>
+                                                </form>
+                                            </div><!-- /.modal-content -->
+                                        </div>
+                                    </div>
+                                    <!-- / .modal -->
                                 </td>
-                                {% else %}
-                                  <td>
-                                      <a href="javascript:void(0);" onclick="timelen('{{ key[0] }}')">输入</a>
-                                  </td>
-                                {% endif %}
+                                <td>{{ key[1].custom_headers['x-cos-meta-cname'] }}</td>
+                                <td>{{ key[1].custom_headers['x-cos-meta-cdate'] }}-{{ key[1].custom_headers['x-cos-meta-ID'] }}</td>
+                                <td>{{ key[1].filelen }}<strong>B</strong></td>
+                                <td>{{ key[1].custom_headers['x-cos-meta-seconds'] }}<strong>秒</strong></td>
+                                <td>{{ key[1].custom_headers['x-cos-meta-title'] }}</td>
+                                <td>{{ key[1].custom_headers['x-cos-meta-subtitle'] }}</td>
                                 <td>
                                     <a href="javascript:void(0);" onclick="playOnPhoneQcloud('/playOnPhoneQcloud?cdn={{ key[0] }}')"><i class=" icon-qrcode"></i>手机扫描二维码</a>
                                 </td>
@@ -59,6 +108,8 @@
             </div>
         </section>
     </section>
+
+
     <div style="width:200px;height: 200px;display: none" id="getcanvastomail">
         <canvas width="200" height="200" id="canvascontent"></canvas>
     </div>

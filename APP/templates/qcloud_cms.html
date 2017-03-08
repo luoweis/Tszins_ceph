@@ -41,16 +41,22 @@
                                 {% if key[1].biz_attr %}
                                 <td>
                                     <a>{{ key[1].biz_attr }}</a>
-                                    <a href="javascript:void(0);" onclick="cmsModify('{{ key[0] }}')" ><i class="icon-eraser"></i></a>
+                                    <a href="javascript:void(0);" onclick="" ><i class="icon-eraser"></i></a>
                                 </td>
                                 {% else %}
                                   <td>
-                                      <a href="javascript:void(0);" onclick="cmsModify('{{ key[0] }}')">输入内容</a>
+                                      <a href="javascript:void(0);" onclick="">输入内容</a>
                                   </td>
                                 {% endif %}
+
                                 <td>
+                                    {% if key[0] | qcloudFilter2 %}
                                     <a href="javascript:void(0);" onclick="cmsView('{{ key[0] }}','{{ key[1].filelen }}')"><i class=" icon-eye-open"></i>展开</a>
+                                    {% else %}
+                                    <a></a>
+                                    {% endif %}
                                 </td>
+
                             </tr>
                         {% endfor %}
                         </tbody>

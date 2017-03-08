@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3884015a-60d6-45ef-a390-28f495b035a1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/APP/templates/folder.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APP/static/sweetalert2/index.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/luoweis/object_storage.py" afterPath="$PROJECT_DIR$/APP/luoweis/object_storage.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/luoweis/qcloud.py" afterPath="$PROJECT_DIR$/APP/luoweis/qcloud.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/static/luoweis.js" afterPath="$PROJECT_DIR$/APP/static/luoweis.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/static/table/js/bootstrap-table.js" afterPath="$PROJECT_DIR$/APP/static/table/js/bootstrap-table.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/templates/base.html" afterPath="$PROJECT_DIR$/APP/templates/base.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/templates/keys.html" afterPath="$PROJECT_DIR$/APP/templates/keys.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/templates/qcloud.html" afterPath="$PROJECT_DIR$/APP/templates/qcloud.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/templates/qcloud_cms.html" afterPath="$PROJECT_DIR$/APP/templates/qcloud_cms.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP/views.py" afterPath="$PROJECT_DIR$/APP/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,6 +60,11 @@
       <find>url_for</find>
       <find>confirm</find>
       <find>POST</find>
+      <find>data-</find>
+      <find>Promise</find>
+      <find>/qcloud/tag</find>
+      <find>biz_attr</find>
+      <find>upload_form</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -64,7 +73,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ceph_api/static/login/js/scripts.js" />
         <option value="$PROJECT_DIR$/ceph_api/templates/login.html" />
         <option value="$PROJECT_DIR$/ceph_api/templates/buttons.html" />
         <option value="$PROJECT_DIR$/ceph_api/__init__.py" />
@@ -100,21 +108,22 @@
         <option value="$PROJECT_DIR$/APP/luoweis/tszins_session.py" />
         <option value="$PROJECT_DIR$/start_gunicorn.sh" />
         <option value="$PROJECT_DIR$/APP/luoweis/sendEmail.py" />
-        <option value="$PROJECT_DIR$/APP/templates/qcloud.html" />
-        <option value="$PROJECT_DIR$/APP/luoweis/qcloud.py" />
-        <option value="$PROJECT_DIR$/APP/templates/qcloud_cms.html" />
         <option value="$PROJECT_DIR$/upload/READ" />
-        <option value="$PROJECT_DIR$/APP/templates/base.html" />
         <option value="$PROJECT_DIR$/gunicorn.conf" />
         <option value="$PROJECT_DIR$/APP/templates/index.html" />
         <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/APP/static/css/style.css" />
         <option value="$PROJECT_DIR$/APP/luoweis/config.py" />
-        <option value="$PROJECT_DIR$/APP/static/luoweis.js" />
         <option value="$PROJECT_DIR$/APP/templates/folder.html" />
-        <option value="$PROJECT_DIR$/APP/views.py" />
         <option value="$PROJECT_DIR$/APP/luoweis/object_storage.py" />
         <option value="$PROJECT_DIR$/APP/templates/keys.html" />
+        <option value="$PROJECT_DIR$/APP/luoweis/qcloud.py" />
+        <option value="$PROJECT_DIR$/APP/static/table/js/bootstrap-table.js" />
+        <option value="$PROJECT_DIR$/APP/templates/qcloud.html" />
+        <option value="$PROJECT_DIR$/APP/templates/base.html" />
+        <option value="$PROJECT_DIR$/APP/views.py" />
+        <option value="$PROJECT_DIR$/APP/static/luoweis.js" />
+        <option value="$PROJECT_DIR$/APP/templates/qcloud_cms.html" />
       </list>
     </option>
   </component>
@@ -125,7 +134,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="123" />
+    <option name="x" value="38" />
     <option name="y" value="22" />
     <option name="width" value="1402" />
     <option name="height" value="878" />
@@ -148,7 +157,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -175,9 +183,64 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tszins_ceph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tszins_ceph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="APP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tszins_ceph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tszins_ceph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="APP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tszins_ceph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tszins_ceph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="APP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="luoweis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -451,14 +514,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="123" y="22" width="1402" height="878" extended-state="0" />
+    <frame x="38" y="22" width="1402" height="878" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15121256" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21897289" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.099857345" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.099857345" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -507,21 +570,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/APP/static/js/data/datagrid.json" />
-    <entry file="file://$PROJECT_DIR$/APP/static/js/app.data.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-686">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APP/static/js/app.plugin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="25" column="42" lean-forward="true" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/APP/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-578">
@@ -540,13 +588,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="468" lean-forward="false" selection-start-line="11" selection-start-column="468" selection-end-line="11" selection-end-column="468" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APP/static/sweetalert2/sweetalert2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="34" column="26" lean-forward="true" selection-start-line="33" selection-start-column="2" selection-end-line="34" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -618,52 +659,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/APP/static/table/js/bootstrap-table.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2310">
-          <caret line="203" column="25" lean-forward="true" selection-start-line="203" selection-start-column="25" selection-end-line="203" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APP/templates/qcloud_cms.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="59" lean-forward="true" selection-start-line="47" selection-start-column="59" selection-end-line="47" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="9" lean-forward="true" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/APP/upload/READ">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APP/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
-          <caret line="74" column="58" lean-forward="true" selection-start-line="74" selection-start-column="58" selection-end-line="74" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APP/templates/qcloud.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="36" column="54" lean-forward="true" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APP/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="87" column="65" lean-forward="true" selection-start-line="87" selection-start-column="65" selection-end-line="87" selection-end-column="65" />
         </state>
       </provider>
     </entry>
@@ -709,13 +708,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -730,32 +722,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/APP/templates/keys.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="48" column="51" lean-forward="true" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APP/static/luoweis.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="365" column="23" lean-forward="false" selection-start-line="365" selection-start-column="23" selection-end-line="365" selection-end-column="23" />
-          <folding>
-            <marker date="1488270073000" expanded="true" signature="264:290" ph="..." />
-            <marker date="1488270073000" expanded="true" signature="558:602" ph="..." />
-            <marker date="1488270073000" expanded="true" signature="5472:5516" ph="..." />
-            <marker date="1488270073000" expanded="true" signature="5774:5818" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/APP/luoweis/config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="33" lean-forward="true" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -763,7 +733,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-119">
           <caret line="104" column="22" lean-forward="false" selection-start-line="104" selection-start-column="22" selection-end-line="104" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -771,7 +740,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -779,22 +747,133 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="24" column="42" lean-forward="false" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP/static/table/css/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP/static/table/css/bootstrap-table.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="56" lean-forward="false" selection-start-line="7" selection-start-column="55" selection-end-line="7" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP/static/table/js/bootstrap.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP/static/sweetalert2/sweetalert2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="1552" column="20" lean-forward="false" selection-start-line="1552" selection-start-column="13" selection-end-line="1552" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="109" column="55" lean-forward="true" selection-start-line="109" selection-start-column="55" selection-end-line="109" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="9" lean-forward="true" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP/templates/keys.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="99" column="30" lean-forward="true" selection-start-line="99" selection-start-column="30" selection-end-line="99" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP/static/table/js/bootstrap-table.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="135" column="21" lean-forward="true" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
+          <folding>
+            <marker date="1488957635000" expanded="true" signature="25064:25068" ph="&lt;" />
+            <marker date="1488957635000" expanded="true" signature="25068:25072" ph="&lt;" />
+            <marker date="1488957635000" expanded="true" signature="25155:25159" ph="&lt;" />
+            <marker date="1488957635000" expanded="true" signature="25923:25927" ph="&gt;" />
+            <marker date="1488957635000" expanded="true" signature="26011:26015" ph="&gt;" />
+            <marker date="1488957635000" expanded="true" signature="26015:26019" ph="&gt;" />
+            <marker date="1488957635000" expanded="true" signature="40242:40259" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="81" column="74" lean-forward="false" selection-start-line="81" selection-start-column="74" selection-end-line="81" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP/templates/qcloud.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="41" lean-forward="false" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP/static/luoweis.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="465" column="13" lean-forward="true" selection-start-line="465" selection-start-column="13" selection-end-line="465" selection-end-column="13" />
+          <folding>
+            <marker date="1488960063000" expanded="true" signature="264:290" ph="..." />
+            <marker date="1488960063000" expanded="true" signature="558:602" ph="..." />
+            <marker date="1488960063000" expanded="true" signature="5472:5516" ph="..." />
+            <marker date="1488960063000" expanded="true" signature="5774:5818" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APP/luoweis/qcloud.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+        <state relative-caret-position="106">
+          <caret line="49" column="25" lean-forward="true" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APP/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3735">
-          <caret line="261" column="15" lean-forward="true" selection-start-line="261" selection-start-column="15" selection-end-line="261" selection-end-column="15" />
+        <state relative-caret-position="151">
+          <caret line="282" column="40" lean-forward="true" selection-start-line="282" selection-start-column="40" selection-end-line="282" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP/templates/qcloud_cms.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="46" column="38" lean-forward="true" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
           <folding />
         </state>
       </provider>

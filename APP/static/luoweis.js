@@ -416,75 +416,66 @@ function uploadSubmit(bucket){
         }
     })
 }
-
-//qcloud
-//qcloud timelen
-function timelen(key){
-    swal({
-        title: '输入时长',
-        html:                                                       //html标签，在弹出框中直接写相关代码，相当于可以再嵌套一个网页！
-
-            '<input id="swal-input1" class="swal2-input" autofocus required />',
-        preConfirm: function() {
-            return new Promise(function(resolve) {       //默认信息不能为空
-                resolve([
-                    $('#swal-input1').val()  //获取文本值
-                ])
-            })
-        }
-    }).then(function(result) {
-        //swal(JSON.stringify(result))  //转换成json输出
-        var res = result[0].split(".");
-        seconds = parseInt(res[0])*60+parseInt(res[1]);
+//qcloudTag submit
+function cloudTagSubmit(){
+    var form = new FormData(document.getElementById("cloudTagForm"));//type object
+    var key = form.get('key');
+    var ID = form.get('ID');
+    var time = form.get('seconds');
+    var title = form.get('title');
+    var subtitle = form.get('subtitle');
+    var cname = form.get('cname');
+    var cdate = form.get('cdate');
+    if (time==''){
+        swal('提交失败','需要填写视频时长','error');
+    }else if(ID==''){
+        swal('提交失败','需要填写视频ID','error');
+    }else if(cname==''){
+        swal('提交失败','需要填写讲师中文名字','error');
+    }else if(cdate==''){
+        swal('提交失败','需要填写视频拍摄日期','error');
+    } else if (title==''){
+        swal('提交失败','需要填写视频标题','error');
+    }else if (subtitle==''){
+        swal('提交失败','需要填写视频副标题','error');
+    }else {
         $.ajax({
-            url: '/qcloud/biz_attr?key='+key+'&biz='+seconds,
-            type:"GET",
-            success:function () {
-                swal({
-                    title: '成功',
-                    type: 'success',
-                    timer:2000
-                });
-                reload();
-            }
-
-        })
-    })
-}
-
-//qcloud cms modify
-function cmsModify(key){
-    swal({
-        title: '输入图片描述',
-        html:                                                       //html标签，在弹出框中直接写相关代码，相当于可以再嵌套一个网页！
-
-            '<input id="swal-input1" class="swal2-input" autofocus required />',
-        preConfirm: function() {
-            return new Promise(function(resolve) {       //默认信息不能为空
-                resolve([
-                    $('#swal-input1').val()  //获取文本值
-                ])
-            })
-        }
-    }).then(function(result) {
-        //swal(JSON.stringify(result))  //转换成json输出
-        content = result[0];
-        if (content){
-            $.ajax({
-                url: '/qcloud/biz_attr?key='+key+'&biz='+content,
-                type:"GET",
-                success:function () {
+            url: '/cloudTag',
+            type: 'POST',
+            data: form,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+                if (res == 'ok') {
                     swal({
                         title: '成功',
+                        text: "提交成功！",
                         type: 'success',
-                        timer:2000
+                        timer: 1000
                     });
                     reload();
                 }
-            })
-        }
-    })
+            },
+            error: function () {
+                swal(
+                    '失败',
+                    '提交失败',
+                    'error'
+                );
+                reload();
+            }
+        })
+    }
 }
+//qcloud
+function addColor(id){
+    document.getElementById(id).style.color='#8B0000';
+
+}
+function removeColor(id){
+    document.getElementById(id).style.color='';
+}
+
 //qcloud
 function cmsView(url,size){
 

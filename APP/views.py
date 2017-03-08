@@ -38,6 +38,20 @@ def fileType(file):
         return 'picture'
     else:
         return 'others'
+@app.template_filter('qcloudFilter1')
+def qcloudFilter1(cdn):
+    m1 = hashlib.md5()
+    m1.update(cdn)
+    res = m1.hexdigest()
+    return res
+@app.template_filter('qcloudFilter2')
+def qcloudFilter2(something):
+    coludView=['png','jpg','jpeg','gif']
+    temp = something.split('.')
+    if temp[-1] in coludView:
+        return True
+    else:
+        return False
 ''' --以上是定义的过滤器-- '''
 #定义session的接口方式，这里将session统一存储到redis数据库中。session的有效期为1天
 app.session_interface = RedisSessionInterface()
@@ -244,7 +258,6 @@ def playVideo(bucket):
     #return  render_template('play.html',url=url)
     return url
 
-
 @app.route('/playOnPhone/<bucket>')
 def playVideoOnPhone(bucket):
     key = request.args['key']
@@ -275,16 +288,32 @@ def playOnPhoneQcloud():
     url = request.args['cdn']
     return render_template('play.html',url = url)
 
-@app.route('/qcloud/biz_attr')
+@app.route('/cloudTag',methods=['GET','POST'])
 @login_required
-def biz_attr():
-    key = request.args['key']
-    biz_attr = request.args['biz']
-    qcloud = qcloud_tszins()
-    qcloud.modifity_key(key,biz_attr)#修改qcloud的biz_attr属性
-    r = tszins_redis.connection()
-    r.hset('qcloud_time',key,biz_attr)
-    return 'ok'
+def cloudTag():
+    if request.method == "POST":
+        time = request.form['seconds']
+        ID = request.form['ID']
+        title = request.form['title']
+        sub_title = request.form['subtitle']
+        key = request.form['key']
+        cname = request.form['cname']
+        cdate = request.form['cdate']
+        if ':' in time:
+            temp = time.split(':')
+            seconds = (int(temp[0])*60+int(temp[1]))
+        else:
+            seconds = time
+        qcloud = qcloud_tszins()
+        res = qcloud.modifity_key(key,seconds,ID,title,sub_title,cname,cdate)
+        return "ok"
+    else:
+        return 'ERROR'
+        #
+        #
+        #r = tszins_redis.connection()
+        #r.hset('qcloud_time',key,biz_attr)
+        #return 'ok'
 ######-------------- single  test-----------###
 @app.route('/redistest')
 def testSingle():
@@ -299,6 +328,12 @@ def testSingle():
 @app.route('/single1')
 def single1():
     qcloud = qcloud_tszins()
-    res = qcloud.list_floder()
+    res = qcloud.list_floder_video()
     res = sorted(res.iteritems(), key=lambda d: d[0])
+    return repr(res)
+
+@app.route('/single2')
+def single2():
+    qcloud = qcloud_tszins()
+    res = qcloud.key_info(u'https://cdn.tszins.tv/taoyongjun/20160918/TYJ_20160918_0001_360P.mp4')
     return repr(res)

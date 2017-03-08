@@ -32,6 +32,8 @@ class qcloud_tszins():
                     name1 = obj['name']
                     if name1 == 'tszins_cms/':
                         pass
+                    elif name1== 'tszins_weixin/' or name1 == 'test/':
+                        pass
                     else:
                         if name1[-1] == '/':
                             name2=name+name1
@@ -67,9 +69,21 @@ class qcloud_tszins():
         request = cos_request.StatFileRequest(self.bucket, cos_path=cos_path)
         res = cos_client.stat_file(request)
         return res
-    def modifity_key(self,key,biz_attr):
+    def modifity_key(self,key,seconds,ID,title,sub_title,cname,cdate):
         cos_client = self.connection()
         cos_path = key.replace('https://cdn.tszins.tv', '')
         request = cos_request.UpdateFileRequest(self.bucket,cos_path=cos_path)
-        request.set_biz_attr(biz_attr)
-        cos_client.update_file(request)
+        #request.set_biz_attr(biz_attr)
+        request.set_x_cos_meta(u'x-cos-meta-seconds',unicode(seconds))
+        request.set_x_cos_meta(u'x-cos-meta-ID', unicode(ID))
+        request.set_x_cos_meta(u'x-cos-meta-title', unicode(title))
+        request.set_x_cos_meta(u'x-cos-meta-subtitle', unicode(sub_title))
+        request.set_x_cos_meta(u'x-cos-meta-cname', unicode(cname))
+        request.set_x_cos_meta(u'x-cos-meta-cdate', unicode(cdate))
+        #信息被写入到custom_headers中
+        #{u'message': 'x-cos-meta-value is not unicode!', u'code': -1}
+        res = cos_client.update_file(request)
+        print res
+
+
+    #------------------------------------#
