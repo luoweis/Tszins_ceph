@@ -42,15 +42,15 @@
                             <tr>
                                 <td>
                                     <a id="id{{ key[0] | qcloudFilter1 }}">{{ key[0] }}</a>
-                                    <a href='#{{ key[0] | qcloudFilter1 }}' data-toggle="modal" onclick="addColor('id{{ key[0] | qcloudFilter1 }}');" ><i class="icon-tag"></i></a>
+                                    <a href='#modal{{ key[0] | qcloudFilter1 }}' data-toggle="modal" onclick="addColor('id{{ key[0] | qcloudFilter1 }}');" ><i class="icon-tag"></i></a>
                                     <!-- .modal -->
-                                    <div id='{{ key[0] | qcloudFilter1 }}' class="modal fade">
+                                    <div id='modal{{ key[0] | qcloudFilter1 }}' class="modal fade">
                                         <div class="modal-dialog pos-abt" style="margin-top:-235px; top:50%">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title" id="myModalLabel">视频描述</h4>
                                                 </div>
-                                                <form role="form" enctype="multipart/form-data" name="cloudTag_Form" id="cloudTagForm">
+                                                <form role="form" enctype="multipart/form-data" name="cloudTag_Form" id="form{{ key[0] | qcloudFilter1 }}">
                                                     <div class="modal-body ">
                                                         <div class="block form-group">
                                                             <label class="control-label">视频CDN</label>
@@ -83,7 +83,7 @@
                                                     </div>
                                                     <div class="modal-footer form-group">
                                                         <button type="button"  data-dismiss="modal" onclick="removeColor('id{{ key[0] | qcloudFilter1 }}');">取消</button>
-                                                        <input type="button" value="submit" onclick="cloudTagSubmit();"/>
+                                                        <input type="button" value="submit" onclick="cloudTagSubmit('form{{ key[0] | qcloudFilter1 }}');" />
                                                     </div>
                                                 </form>
                                             </div><!-- /.modal-content -->

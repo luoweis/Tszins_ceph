@@ -1,18 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from APP import app
-import os,hashlib,json
-from flask import render_template
-from flask import abort, redirect, url_for,session,escape,request
+import hashlib
+import json
+import os
 from functools import wraps
+
+from flask import redirect, url_for,session, request
+from flask import render_template
+from werkzeug.utils import secure_filename
+
+import luoweis.config
+from APP import app
 from luoweis.object_storage import object_storage
 from luoweis.tszins_redis import tszins_redis
-from luoweis.qcloud import qcloud_tszins
-#引入全局配置文件
-import luoweis.config
-from werkzeug.utils import secure_filename
-#redis session
 from luoweis.tszins_session import RedisSessionInterface
+
 
 #定义过滤器
 #过滤器 keySize
@@ -270,50 +272,6 @@ def playVideoOnPhone(bucket):
     else:
         pass
     return  render_template('play.html',url=url)
-#qcloud
-@app.route('/qcloud/video')
-@login_required
-def qcloud():
-    qcloud = qcloud_tszins()
-    res = qcloud.list_floder_video()
-    return render_template('qcloud.html',qcloud=res)
-@app.route('/qcloud/tszins_cms')
-@login_required
-def qcloud_cms():
-    qcloud = qcloud_tszins(u'/tszins_cms/')
-    res = qcloud.list_floder_cms()
-    return render_template('qcloud_cms.html',qcloud=res)
-@app.route('/playOnPhoneQcloud')
-def playOnPhoneQcloud():
-    url = request.args['cdn']
-    return render_template('play.html',url = url)
-
-@app.route('/cloudTag',methods=['GET','POST'])
-@login_required
-def cloudTag():
-    if request.method == "POST":
-        time = request.form['seconds']
-        ID = request.form['ID']
-        title = request.form['title']
-        sub_title = request.form['subtitle']
-        key = request.form['key']
-        cname = request.form['cname']
-        cdate = request.form['cdate']
-        if ':' in time:
-            temp = time.split(':')
-            seconds = (int(temp[0])*60+int(temp[1]))
-        else:
-            seconds = time
-        qcloud = qcloud_tszins()
-        res = qcloud.modifity_key(key,seconds,ID,title,sub_title,cname,cdate)
-        return "ok"
-    else:
-        return 'ERROR'
-        #
-        #
-        #r = tszins_redis.connection()
-        #r.hset('qcloud_time',key,biz_attr)
-        #return 'ok'
 ######-------------- single  test-----------###
 @app.route('/redistest')
 def testSingle():
@@ -324,16 +282,3 @@ def testSingle():
     # else:
     #     return 'no'
     return res
-
-@app.route('/single1')
-def single1():
-    qcloud = qcloud_tszins()
-    res = qcloud.list_floder_video()
-    res = sorted(res.iteritems(), key=lambda d: d[0])
-    return repr(res)
-
-@app.route('/single2')
-def single2():
-    qcloud = qcloud_tszins()
-    res = qcloud.key_info(u'https://cdn.tszins.tv/taoyongjun/20160918/TYJ_20160918_0001_360P.mp4')
-    return repr(res)

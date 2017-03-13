@@ -417,8 +417,8 @@ function uploadSubmit(bucket){
     })
 }
 //qcloudTag submit
-function cloudTagSubmit(){
-    var form = new FormData(document.getElementById("cloudTagForm"));//type object
+function cloudTagSubmit(formId){
+    var form = new FormData(document.getElementById(formId));//type object
     var key = form.get('key');
     var ID = form.get('ID');
     var time = form.get('seconds');
@@ -462,6 +462,7 @@ function cloudTagSubmit(){
                     '提交失败',
                     'error'
                 );
+
                 reload();
             }
         })

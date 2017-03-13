@@ -3,17 +3,17 @@
 from APP import app
 import qcloud_cos
 from qcloud_cos import cos_request
-import config
+import APP.luoweis.config
 import sys,os
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 class qcloud_tszins():
     def __init__(self,os_path=u'/'):
-        self.appid = config.qcloud_appid
-        self.secret_id = config.qcloud_secret_id
-        self.secret_key = config.qcloud_secret_key
-        self.region_info = config.qcloud_region_info
+        self.appid = APP.luoweis.config.qcloud_appid
+        self.secret_id = APP.luoweis.config.qcloud_secret_id
+        self.secret_key = APP.luoweis.config.qcloud_secret_key
+        self.region_info = APP.luoweis.config.qcloud_region_info
         self.bucket = u'tszins001'
         self.os_path = os_path
         self.cdn = u'https://cdn.tszins.tv/'
@@ -83,7 +83,10 @@ class qcloud_tszins():
         #信息被写入到custom_headers中
         #{u'message': 'x-cos-meta-value is not unicode!', u'code': -1}
         res = cos_client.update_file(request)
-        print res
-
+        #{u'message': u'SUCCESS', u'code': 0, u'request_id': u'NThjNjI4NmFfMjViMjM1XzY5NmNfMjJmMTc='}
+        if res['code'] == 0:
+            return 'ok'
+        else:
+            return res['message']
 
     #------------------------------------#
